@@ -75,16 +75,29 @@ module WorkitemHelper
 
     else
 
-      link_to_function(
-        "save", 
-        "DenshaHash.doSubmit('save');", 
-        :title => "saves the workitem, but don't let it resume in the process for now") +
-      " | delegate" +
-      " | " +
-      link_to_function(
-        "proceed", 
-        "DenshaHash.doSubmit('proceed');",
-        :title => "saves the workitem and make it resume in the process")
+      html = \
+        link_to_function(
+          "save", 
+          "DenshaHash.doSubmit('save');", 
+          :title => "saves the workitem, but don't let it resume in the process for now") +
+        " | delegate" +
+        " | " +
+        link_to_function(
+          "proceed", 
+          "DenshaHash.doSubmit('proceed');",
+          :title => "saves the workitem and make it resume in the process")
+
+      if @workitem.store_name != 'users'
+        html += \
+         " | " + 
+         link_to(
+           "pick", 
+             { :controller => "workitem", :action => "pick",
+               :id => @workitem.id },
+             { :title => "pick this workitem and put it into own store" })
+      end
+
+      html
 
       #" | " +
       #link_to_function(

@@ -62,6 +62,23 @@ class WorkitemController < ApplicationController
   end
 
   #
+  # picks the workitem (users places it into its own workitem store).
+  #
+  def pick
+
+    wid = params[:id]
+
+    return error_wi_not_found \
+        unless OpenWFE::Extras::Workitem.exists?(wid)
+    return error_wi_locked \
+        unless Densha::Locks.lock_workitem(session[:user], wid)
+
+    pick_workitem wid
+
+    redirect_to :controller => "stores"
+  end
+
+  #
   # opens a workitem in view-only mode
   #
   def view
@@ -247,6 +264,22 @@ class WorkitemController < ApplicationController
 
       @paused = $openwferu_engine.is_paused?(@workitem.full_fei.wfid)
         # a small digression (out of the worklist, into the engine)
+    end
+
+    #
+    # The workitem gets 'picked' by the current user.
+    # It thus gets placed in the "users" workitem stores, available
+    # for the user.
+    #
+    def pick_workitem (workitem_id)
+
+      user = session[:user]
+
+      workitem = OpenWFE::Extras::Workitem.find workitem_id
+
+      workitem.store_name = "users"
+      workitem.participant_name = user.name
+      workitem.save!
     end
 
 end
