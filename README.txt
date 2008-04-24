@@ -51,6 +51,15 @@ That will install Rails 2.0.2 under ruote-web/vendor/rails
 And point your browser to http://localhost:3000 (then login as admin/admin or bob/bob)
 
 
+== update it
+
+    cd ruote-web && git pull
+
+to update the engine and its dependencies, simply pull out fresh copies by doing :
+
+    cd ruote-web && rake install_workflow_engine
+
+
 == feedback
 
 user mailing list :        http://groups.google.com/group/openwferu-users

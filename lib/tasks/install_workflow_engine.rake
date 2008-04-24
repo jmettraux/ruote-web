@@ -17,14 +17,18 @@ task :install_workflow_engine do
 
   FileUtils.mkdir "tmp" unless File.exists?("tmp")
 
+  sh "rm -fR vendor/ruote"
+  sh "rm -fR vendor/rufus"
+
   RUFUSES.each { |e| git_clone(e) }
   git_clone("ruote")
 end
 
 def git_clone (elt)
-    sh "cd tmp && git clone git://github.com/jmettraux/#{elt}.git"
-    sh "cp -pR tmp/#{elt}/lib/* vendor/"
-    FileUtils.rm_rf("tmp/#{elt}")
+
+  sh "cd tmp && git clone git://github.com/jmettraux/#{elt}.git"
+  sh "cp -pR tmp/#{elt}/lib/* vendor/"
+  sh "rm -fR tmp/#{elt}"
 end
 
 #
