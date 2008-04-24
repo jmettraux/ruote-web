@@ -38,7 +38,7 @@ task :gem_install_workflow_engine do
   GEMS << "openwferu-extras"
 
   GEMS << "json_pure"
-  GEMS << "xml_simple"
+  #GEMS << "xml_simple"
 
   sh "sudo gem install -y #{GEMS.join(' ')}"
 
