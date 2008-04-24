@@ -1,5 +1,8 @@
 
-RUFUS_GEMS = %w{ dollar eval lru mnemo scheduler verbs }
+require 'fileutils'
+
+RUFUSES = %w{ 
+    dollar eval lru mnemo scheduler verbs }.collect { |e| "rufus-#{e}" }
 
 #
 # do use either :install_workflow_engine either :install_dependency_gems
@@ -12,19 +15,16 @@ RUFUS_GEMS = %w{ dollar eval lru mnemo scheduler verbs }
 #
 task :install_workflow_engine do
 
-  SVNS = RUFUS_GEMS.collect do |e|
-    "http://rufus.rubyforge.org/svn/trunk/#{e}/lib/rufus"
-  end
+  FileUtils.mkdir "tmp" unless File.exists?("tmp")
 
-  SVNS << "http://openwferu.rubyforge.org/svn/trunk/openwfe-ruby/lib/openwfe"
+  RUFUSES.each { |e| git_clone(e) }
+  git_clone("ruote")
+end
 
-  SVNS.each do |s|
-
-    target = s.split("/").last
-    #`svn co #{s} vendor/#{target}`
-    sh "svn co #{s} vendor/#{target}"
-    sh "rm -fR vendor/rufus/.svn"
-  end
+def git_clone (elt)
+    sh "cd tmp && git clone git://github.com/jmettraux/#{elt}.git"
+    sh "cp -pR tmp/#{elt}/lib/* vendor/"
+    FileUtils.rm_rf("tmp/#{elt}")
 end
 
 #
@@ -32,9 +32,7 @@ end
 #
 task :gem_install_workflow_engine do
 
-  GEMS = RUFUS_GEMS.collect do |e|
-    "rufus-#{e}"
-  end
+  GEMS = RUFUSES.dup
 
   GEMS << "openwferu"
   GEMS << "openwferu-extras"
