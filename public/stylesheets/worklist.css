@@ -1,0 +1,28 @@
+/*
+ * worklist.css
+ */
+
+.worklist_record_header
+{
+    font-style: italic;
+    padding-bottom: 5px;
+}
+.worklist_record_cell
+{
+    padding-right: 4px;
+}
+.worklist_category_description
+{
+    font-style: italic;
+    font-size: 80%;
+    padding-bottom: 5px;
+}
+.worklist_string_input
+{
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding-top: 4px;
+    padding: 0;
+    border-bottom: 1px dotted #aeaeae;
+}

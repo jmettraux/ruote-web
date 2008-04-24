@@ -1,0 +1,36 @@
+
+/*
+ * launchp.css
+ */
+
+.launchp_info
+{
+    width: 87%;
+    position: relative;
+    float: left;
+}
+.launchp_groupname
+{
+    font-size: 10px;
+    color: #aaaaaa;
+    width: 12%;
+}
+.launchp_url
+{
+    font-size: 13px;
+}
+.launchp_description
+{
+    font-size: 10px;
+    font-style: italic;
+    padding-left: 10px;
+    color: #aaaaaa;
+    width: 50%;
+}
+.launchp_buttons
+{
+    font-size: 10px;
+    position: relative;
+    float: right;
+}
+

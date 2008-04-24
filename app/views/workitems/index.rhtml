@@ -1,0 +1,81 @@
+
+<div>
+  <div class="wis_search_form">
+  <% form_tag '/workitems', :method => :get do %>
+    <input type="text" name="q" value="<%= h(@query_string) %>" />
+    <input type="submit" value="search" title="searches among the workitems" />
+  <% end %>
+  </div>
+  <div class="wis_count">found <%= @workitems.size %> workitem(s).</div>
+  <div style="clear: both;"></div>
+</div>
+
+<%
+  user = session[:user]
+
+  @workitems.each do |workitem|
+
+    buttons = link_to(
+      "view",
+      { :controller => :workitem,
+        :action => :view,
+        :id => workitem.id },
+      { :title => "view workitem" })
+
+    if @worklist.permission(workitem.store_name).may_write? and \
+      (not Locks.is_locked?(user, workitem.id))
+
+      buttons << " | "
+      buttons << link_to(
+        "edit",
+        { :controller => :workitem,
+          :action => :edit,
+          :id => workitem.id },
+        { :title => "edit workitem" })
+    end
+
+    if user.admin?
+
+      buttons << " | "
+      buttons << link_to(
+        "process",
+        { :controller => :process,
+          :action => :edit,
+          :id => workitem.wfid },
+        { :title => "view / edit process instance" })
+    end
+-%>
+    <div class="wis_workitem">
+      <div class="search_workitem_head">
+        <%= h(workitem.wfid) %>
+        <%= h(workitem.full_fei.expression_id) %>
+        <%= h(workitem.full_fei.wfname) %>
+        <%= h(workitem.full_fei.wfrevision) %>
+        --
+        store '<%= h(workitem.store_name) %>'
+        --
+        participant '<%= h(workitem.participant_name) %>'
+      </div>
+      <div class="wis_workitem_body">
+        <% 
+          workitem.fields.each do |field| 
+
+            next if field.fkey.match '^_'
+            next if field.fkey == 'params'
+        -%>
+
+          <%= h(field.fkey) %> : <%= h(field.svalue) %><br/>
+        <% end %>
+      </div>
+      <div class="wis_workitem_foot">
+        <%= buttons %>
+      </div>
+    </div>
+<%
+  end
+-%>
+
+<div class="explanation">
+The results of the text search of workitems.
+</div>
+

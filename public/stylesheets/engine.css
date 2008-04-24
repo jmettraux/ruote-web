@@ -1,0 +1,31 @@
+/*
+ *
+ * engine.css
+ *
+ */
+
+#engine_feed
+{
+    padding-top: 35px;
+}
+
+.engine_par_row
+{
+    width: 100%;
+}
+.engine_par_regex
+{
+    float: left;
+    width: 30%;
+}
+.engine_par_participant
+{
+    float: right;
+    width: 70%;
+}
+.engine_par_header
+{
+    font-style: italic;
+    padding-bottom: 9px;
+}
+

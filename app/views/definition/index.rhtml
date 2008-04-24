@@ -1,0 +1,42 @@
+
+<%= javascript_include_tag "fluo-min" %>
+
+<%= stylesheet_link_tag 'SyntaxHighlighter' %>
+<%= javascript_include_tag "shCore" %>
+<%= javascript_include_tag "shBrushRuby" %>
+<%= javascript_include_tag "shBrushXml" %>
+
+<div class="definitions_url">
+<%= link_to @defurl, @defurl %>
+</div>
+
+<div class="definitions_buttons">
+<%=
+    link_to(
+        "launch this process", 
+        :controller => "launchp", :action => "launch", 
+        :id => @lp.id) if @from_launch
+-%>
+</div>
+
+<div style="clear: both;"></div>
+
+<div style="width: 60%; float:left;">
+<pre name="code" class="<%= @is_xml ? 'xml' : 'ruby' %>">
+<%= @process_definition.gsub("<", "&lt;").gsub("\n\n", "\n") %>
+</pre>
+</div>
+<script>
+//dp.SyntaxHighlighter.ClipboardSwf = '/javascripts/shclipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+
+<div style="width: 39%; float:right;">
+  <%= render_fluo %>
+</div>
+
+<div style="clear: both;"></div>
+
+<div class="explanation">
+Process definition along with its graphical representation.
+</div>

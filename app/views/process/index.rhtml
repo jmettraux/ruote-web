@@ -1,0 +1,191 @@
+
+<%= javascript_include_tag "fluo-min" %>
+<%= javascript_include_tag "densha-dial" %>
+<%= javascript_include_tag "densha-hash" %>
+
+<script>
+
+  function highlightExpression (expid) {
+      var e = $('fluo_exp_'+expid)
+      if (e) e.addClassName('process_highlight');
+  }
+  function noHighlight (expid) {
+      var e = $('fluo_exp_'+expid)
+      if (e) e.removeClassName('process_highlight');
+  }
+
+  function hasClosedDialog () {
+      var d = $('dial_dialog');
+      if (d && d.visible()) {
+          d.close();
+          return true;
+      }
+      return false
+  }
+
+  function showUploadDialog () {
+
+      if (hasClosedDialog()) return;
+
+      var d = DenshaDial.newDialog
+          ("upload new version of expression (as YAML file)", 500, 105);
+
+      var f = new Element
+          ("form", { "method": "POST", "enctype": "multipart/form-data" });
+      var fi = new Element
+          ("input", { "type": "file", "name": "expression", "size": "50" });
+      var si = new Element
+          ("input", { "type": "submit", "value": "upload" });
+      f.appendChild(fi);
+      f.appendChild(si);
+      d.body.appendChild(f);
+
+      return d;
+  }
+
+  function showDialog (fei, title, items) {
+
+      $('hash_form_fei').value = Object.toJSON(fei);
+
+      var width = 500;
+      if (showDialog.arguments.length > 3) width = showDialog.arguments[3];
+
+      var l = Object.keys(items).length;
+
+      var d = DenshaDial.newDialog(title, width, (l + 9) * 14);
+
+      var hash = new Element("div", { "id": "hash", "class": "hash_hash" });
+      d.body.appendChild(hash);
+
+      DenshaHash.newJsonField($('hash'), items, true);
+
+      var menu = d.header.lastChild;
+      menu.appendChild(document.createTextNode(" | "));
+      var save = new Element
+          ("a", 
+           { "href": "#", 
+             "onclick": "$('dial_dialog').save(); return false;",
+             "title": "save changes and close dialog" });
+      save.appendChild(document.createTextNode("save"));
+      menu.appendChild(save);
+
+      return d;
+  }
+
+  function editWorkitem (fei, wi) {
+
+      if (hasClosedDialog()) return;
+
+      var d = showDialog(fei, "workitem at "+fei['expression_id'], wi, 700);
+
+      d.save = function () {
+          d.close();
+          DenshaHash.doSubmit('save');
+      };
+  }
+
+  function editVariables (fei, vars) {
+
+      if (hasClosedDialog()) return;
+
+      var expid = fei['expression_id'];
+      var title = "variables at "+expid;
+      if (expid == "0") title = "variables for the whole process instance";
+
+      var d = showDialog(fei, title, vars);
+
+      d.save = function () {
+          d.close();
+          DenshaHash.doSubmit('save');
+      };
+  }
+
+</script>
+
+<%
+    fei = @process_stack[0].fei
+    c = "process"
+
+    wfurl = fei.wfurl
+    wfurl = wfurl[7..-1] if wfurl.match /^public\//
+-%>
+
+<div class="process_tree">
+
+  <br/>
+
+  <div class="process_headers">
+    <%= render_row c, "workflow name", fei.wfname %>
+    <%= render_row c, "revision", fei.wfrevision %>
+    <%= render_row c, "location", wfurl %>
+    <%= render_row c, "workflow instance id", fei.wfid %>
+    <%= render_row c, "branches", @status.branches, "indicates how many concurrent branches this process instance currently has" %>
+    <%= render_row c, "status", @paused ? "<i>paused</i>" : "running" %>
+  </div>
+  
+  <br/>
+  <br/>
+  
+  <div class="process_stack">
+  <%
+    @process_stack.each do |fexp|
+  -%>
+    <%=
+      if fexp.is_a?(OpenWFE::Environment)
+        render :partial => "fexp_environment", :locals => { :fexp => fexp }
+      else
+        render :partial => "fexp_regular", :locals => { :fexp => fexp }
+      end
+    -%>
+  <%
+    end
+  -%>
+  </div>
+
+  <div class="process_buttons">
+  <%=
+    link_to(
+      (@show_unapplied ? "hide" : "show") + " unapplied expressions",
+      { :show_unapplied => (not @show_unapplied).to_s },
+      {})
+  -%>
+  <% if @show_unapplied %>
+    | <%=
+      link_to_function(
+        "upload expression (as yaml)",
+        "showUploadDialog()")
+    -%>
+  <% end %>
+  </div>
+
+</div>
+
+
+<div class="process_fluo">
+
+  <%= render_fluo %>
+
+  <script>
+    Fluo.tagExpressionsWithWorkitems('fluo', <%= @workitems.inspect %>);
+  </script>
+
+</div>
+
+<div style="clear: both;"></div>
+
+<!-- hidden variables/workitem form -->
+<% form_tag "/process/#{fei.wfid}", :id => "hash_form" do %>
+
+  <input name="show_unapplied" type="hidden" value="<%= (@show_unapplied == true) %>" />
+
+  <input name="hash_form_fei" id="hash_form_fei" type="hidden" />
+
+  <input name="hash_form_action" id="hash_form_action" type="hidden" />
+  <input name="hash_form_json" id="hash_form_json" type="hidden" />
+<% end %>
+
+<div class="explanation">
+A process admin can directly manipulate a process instance here.<br/>
+ The 'processes' screen is limited to cancelling whole processes, here branches of a process instance can be 'cut' (cancelled).<br/>
+It's possible to remove expressions before they get executed and also to modify the variables set in the process instance.
+</div>

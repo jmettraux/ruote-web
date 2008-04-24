@@ -1,0 +1,11 @@
+<h3>users</h3>
+<div class="worklist_category_description">
+listing the users of this "densha" web application
+</div>
+<%= 
+    render_record_table(
+        User,
+        records,
+        #[ [ :name, "60%" ], [ :admin, "20%" ] ])
+        [ [ :name, "30%" ], [ :password, "30%" ], [ :admin, "20%" ] ])
+-%>

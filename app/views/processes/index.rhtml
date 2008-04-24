@@ -1,0 +1,90 @@
+<script>
+    var processes_count = <%= @status.size %>;
+
+    function hideErrors (wfid) {
+        elt = $('errors_'+wfid);
+        if (elt) elt.remove();
+    }
+
+    var all_selected = false;
+
+    function toggle_batch_select () {
+
+        all_selected = ! all_selected;
+
+        $$('.processes_checkbox').each(function (e) {
+            e.checked = all_selected;
+        });
+        $('batch_sel').innerHTML = all_selected ? "none" : "all";
+    }
+
+    function batch (action) {
+
+        if (confirm('Really '+action+' those processes?'))  {
+            $('processes_batch_action').value = action;
+            $('processes_batch').submit();
+        }
+    }
+</script>
+
+<form 
+    id="processes_batch"
+    action="/processes/do_in_batch"
+    method="post"
+>
+<input id="processes_batch_action" type="hidden" name="processes_batch_action" />
+
+<table class="processes_status">
+    <tr>
+        <th width="17%" title="aka the process instance id">workflow instance id</th>
+        <th width="15%" title="the name of the process definition (and its revision)">name</th>
+        <th width="23%" title="when the process instance was launched" >launched</th>
+        <th width="2%" title="the number of concurrent branches currently active">br</th>
+        <th width="3%" title="the number of errors encountered (blockers)">err</th>
+        <th width="6%" title="running or in pause ?">state</th>
+        <th width="13%" title="region tags this process is currently crossing">tags</th>
+        <th width="21%" class="processes_count">process instances : <span id="processes_count"><%= @status.size %></span></th>
+    </tr>
+    <%
+        #@status.values.each do |@row_status|
+
+        statuses = @status.values.sort_by { |e| e.launch_time }
+        statuses.each do |@row_status|
+
+            @row_wfid = @row_status.wfid
+            @row_id = "processes_row_#{@row_wfid}"
+    -%>
+    <tr
+        id="<%= @row_id %>"
+        onmouseover="<%= omover(@row_id, 'row_over') %>"
+        onmouseout="<%= omout(@row_id, 'row_over') %>"
+    >
+        <%= render :partial => "process_status" %>
+    </tr>
+    <%
+        end
+    -%>
+
+    <tr><td colspan="8">&nbsp;</td></tr>
+
+    <tr><td colspan="8" class="processes_batch_buttons">select <a href="#" onclick="toggle_batch_select(); return false;" title="toggles selection of all/none of the process instances"><span id="batch_sel">all</span></a> | batch <%= link_to_function(
+        "abort",
+        "batch('abort')",
+        :title => "aborts (cancels) all the selected processes")
+    -%> | <%= link_to_function(
+        "pause",
+        "batch('pause')",
+        :title => "pauses all the selected processes")
+    -%> | <%= link_to_function(
+        "resume",
+        "batch('resume')",
+        :title => "resumes all the selected processes (if they were in pause)")
+    -%> 
+    </td></tr>
+</table> 
+</form>
+
+<div class="explanation">
+A list of the process instances alive in the process engine.<br/>
+You can pause/resume them or cancel (abort) them.<br/>
+</div>

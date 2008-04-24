@@ -1,0 +1,13 @@
+<h3>launch permissions</h3>
+
+<div class="worklist_category_description">
+granting launch permissions on URLs to groups of users<br/>
+no groupname means the process definition is launchable by anybody
+</div>
+
+<%= 
+    render_record_table(
+        LaunchPermission,
+        records,
+        [ [ :groupname, "21%" ], [ :url, "70%" ] ])
+-%>

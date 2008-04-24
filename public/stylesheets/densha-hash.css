@@ -1,0 +1,57 @@
+/*
+ * densha-hash.css
+ */
+
+.hash_hash
+{
+}
+.hash_entry
+{
+    font-size: 12px;
+    width: 100%;
+}
+.hash_entry_over
+{
+    background-color: #eeeeee;
+}
+.hash_entry_add
+{
+    font-size: 10px;
+}
+.hash_key
+{
+    width: 30%;
+    float: left;
+    text-align: right;
+    overflow: hidden;
+}
+.hash_value
+{
+    width: 68%;
+    float: right;
+    text-align: left;
+}
+.hash_buttons
+{
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+}
+.hash_string_input
+{
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 0;
+    border-bottom: 1px dotted #dddddd;
+    font-size: 12px;
+}
+.hash_type_field
+{
+    font-size: 9px;
+}
+.hash_minus_button
+{
+    position: absolute;
+    right: 96%;
+}

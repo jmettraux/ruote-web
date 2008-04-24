@@ -1,0 +1,11 @@
+
+page.replace_html "flash", "process instance #{@wfid} got aborted (cancelled)"
+
+#page.call "decProcessesCount"
+page << """
+  processes_count -= 1;
+  $('processes_count').innerHTML = ''+processes_count;
+"""
+
+page.remove "processes_row_#{@wfid}"
+

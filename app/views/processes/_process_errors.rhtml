@@ -1,0 +1,55 @@
+
+<tr id="errors_<%= @wfid %>">
+    <td colspan="8">
+        <div 
+           class="processes_errors"
+        >
+<%
+    @status.errors.each_pair do |feid, perror|
+
+        stacktrace = perror.stacktrace.split "\n"
+        stacktrace = stacktrace[0..7].join "<br/>"
+
+        is_paused_error = (perror.error_class == 'OpenWFE::PausedError')
+
+-%>
+        <div class="processes_error">
+            <b>at:</b> <%= perror.fei%><br/>
+
+            <% if is_paused_error %>
+
+                <br/>
+                There is a workitem waiting at that point. Simply hit 'resume' and it will continue in the process.
+
+            <% else %>
+
+                <!--<b>workitem:</b> <%# perror.workitem %></br>-->
+                <b>date:</b> <%= perror.date %></br>
+                <b>class:</b> <%= perror.error_class %></br>
+                <b>message:</b> <%= perror.message %></br>
+
+                <b>stacktrace:</b><br/>
+                <%= stacktrace %></br>
+
+                <div class="processes_error_replay">
+                    <%= 
+                        link_to(
+                            "replay",
+                            { :action => "replay_at_error", 
+                              :id => perror.fei.to_web_s },
+                            { :title => "replay at that error (make sure to fix the cause of the error before)",
+                              :confirm => "You really want to replay at that error ?" })
+                    -%>
+                </div>
+                <div style="clear: both;"></div>
+
+            <% end %>
+        </div>
+<%
+    end
+-%>
+
+        </div>
+    </td>
+</tr>
+

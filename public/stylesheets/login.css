@@ -1,0 +1,30 @@
+/*
+ * login.css
+ */
+
+.login_info
+{
+    width: 59%;
+    float: left;
+    font-size: 90%;
+}
+.login_form
+{
+    width: 40%;
+    float: right;
+    font-size: 90%;
+    padding-top: 14px;
+    padding-right: 7px;
+}
+.login_key
+{
+    width: 45%;
+    clear: both;
+    float: left;
+    text-align: right;
+}
+.login_value
+{
+    width: 50%;
+    float: right;
+}

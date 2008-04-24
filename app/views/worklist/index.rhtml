@@ -1,0 +1,69 @@
+
+<%= javascript_include_tag "densha-worklist" %>
+
+<div>
+
+    <div id="worklist_User" style="float: left; width:49%;">
+    <%= render(
+        :partial => "index_users", 
+        :locals => { :records => @users })
+    -%>
+    </div>
+
+    <div id="worklist_Group" style="float: left; width:49%;">
+    <%= render :partial => "index_groups", :locals => { :records => @groups } %>
+    </div>
+
+    <div style="clear: both;"></div>
+</div>
+
+<div>
+
+    <div id="worklist_StorePermission" style="float: left; width:49%;">
+    <%= render(
+        :partial => "index_storepermissions", 
+        :locals => { :records => @storepermissions })
+    -%>
+    </div>
+
+    <div id="worklist_WiStore" style="float: left; width:49%;">
+    <%= render(
+        :partial => "index_wistores", 
+        :locals => { :records => @stores })
+    -%>
+    </div>
+
+    <div style="clear: both;"></div>
+</div>
+
+<div>
+
+    <div id="worklist_LaunchPermission" style="float: left; width:90%;">
+    <%= render(
+        :partial => "index_launchpermissions", 
+        :locals => { :records => @launchpermissions })
+    -%>
+    </div>
+
+    <div style="clear: both;"></div>
+</div>
+
+
+<!-- process definition upload -->
+<div>
+    <div class="worklist_category_description">
+        or upload a process definition (will create the launch permission for it) :<br/>
+    </div>
+    <% form_tag('/worklist/pdef/upload', :multipart => true) do 
+    -%>
+        <input type="text" name="groupname" title="groupname for the new launch permission"/>
+        &nbsp;&nbsp;&nbsp;
+        <input type="file" name="process_definition" title="browse for the process definition to upload" />
+        <%= submit_tag 'upload' %>
+    <% end -%>
+</div>
+
+<div class="explanation">
+Settings of the 'worklist' (not the engine proper). Densha wraps an OpenWFEru workflow engine with a worklist within a web application.
+</div>
+

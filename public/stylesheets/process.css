@@ -1,0 +1,73 @@
+
+.process_headers
+{
+    font-size: 11px;
+}
+.process_header
+{
+    width: 400px;
+}
+.process_entry
+{
+}
+.process_entry_over
+{
+    background-color: #eeeeee;
+}
+.process_key
+{
+    width: 30%;
+    text-align: right;
+    float: left;
+    padding-right: 4px;
+}
+.process_value
+{
+    width: 68%;
+    float: left;
+}
+
+.process_stack
+{
+}
+
+.process_expression
+{
+    border-left: 3px #0868AC solid;
+    margin-right: 3px;
+}
+.process_unapplied_expression
+{
+    border-left: 3px #E7E7E7 solid;
+}
+.process_exp_over
+{
+    background-color: #eeeeee;
+}
+
+.process_buttons
+{
+    padding-top: 28px;
+}
+.dial_body
+{
+    padding-top: 7px;
+    text-align: center;
+}
+
+.process_tree
+{
+    font-size: 11px;
+    width: 51%;
+    float: left;
+}
+.process_fluo
+{
+    width: 47%;
+    float: left;
+}
+
+.process_highlight
+{
+    background: #B5D5FF;
+}

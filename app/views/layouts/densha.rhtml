@@ -1,0 +1,57 @@
+
+<html>
+
+<head>
+
+    <title>densha : <%= controller.controller_name %> : <%= controller.action_name %></title>
+
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "prototype" %>
+
+    <%= stylesheet_link_tag 'fluo' %>
+    <%= stylesheet_link_tag 'densha-dial' %>
+    <%= stylesheet_link_tag 'densha-hash' %>
+    <%= stylesheets %>
+
+    <link rel='alternate' type='application/atom+xml' title='Atom Activity Feed' href='/activity' />
+
+</head>
+
+<body>
+    <div id="content">
+        <div id="banner">
+            <div id="openwfe-logo">
+                <a href="http://openwferu.rubyforge.org"><img src="/images/openwfe-logo.png"/></a>
+            </div>
+        </div>
+
+        <div id="breadcrumbs">
+            <div 
+                style="float: left; cursor: pointer;"
+                title="about..."
+                onclick="document.location='/about';"
+            >
+                open source ruby workflow and bpm engine
+            </div>
+            <div style="float:right" id="top-menu">
+                <%= render_admin_menu if session[:user].admin? %>
+                <%= render_menu %>
+            </div>
+        </div>
+
+        <div id="postbreadcrumbs">
+        </div>
+
+        <div id="flash"><%= flash[:notice] %></div>
+
+        <div id="corebox">
+            <%= yield :layout %>
+        </div>
+
+        <div id="footer">
+            (c) 2007-2008 OpenWFE.org
+        </div>
+    </div>
+</body>
+</html>
+

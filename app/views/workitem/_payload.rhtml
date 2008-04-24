@@ -1,0 +1,54 @@
+
+<%= javascript_include_tag "densha-hash" %>
+
+<%
+  fei = @workitem.full_fei
+  process = "#{fei.wfname} #{fei.wfrevision}"
+
+  c = "hash"
+
+  wfid = if session[:user].admin?
+    link_to(
+      fei.wfid, 
+      { :controller => :process, :id => fei.wfid },
+      { :title => "edit this process instance" })
+  else
+    fei.wfid
+  end
+-%>
+
+<div id="workitem_headers" class="hash_hash">
+
+  <%= render_row c, "workitem id", @workitem.id %>
+  <%= render_row c, "process instance", wfid %>
+  <%= render_row c, "process", process %>
+  <%= render_row c, "position", fei.expression_id %>
+  <%= render_row c, "participant", @workitem.participant_name %>
+  <%= render_row c, "store", @workitem.store_name %>
+  <%= render_row c, "dispatched on", render_time(@workitem, :dispatch_time) %>
+  <%= render_row c, "last modified on", render_time(@workitem, :last_modified) %>
+  <%= render_row c, "process status", @paused ? "<i>paused</i>" : "running" %>
+
+</div>
+
+<br/>
+
+<div id="hash" class="hash_hash"></div>
+
+<script>
+DenshaHash.newJsonField(
+  $('hash'), 
+  <%= @fields.to_json %>,
+  <%= ( ! @view_only) %>);
+</script>
+
+<br/>
+<br/>
+
+<div class="workitem_buttons"><%= workitem_buttons %></div>
+
+<% form_tag "/workitem/update/#{@workitem.id}", :id => "hash_form" do %>
+  <input name="hash_form_action" id="hash_form_action" type="hidden" />
+  <input name="hash_form_json" id="hash_form_json" type="hidden" />
+<% end %>
+

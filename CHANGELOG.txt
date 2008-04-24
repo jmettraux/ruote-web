@@ -1,0 +1,81 @@
+
+= openwferu-densha CHANGELOG.txt
+
+
+== densha - 0.9.18    not yet released
+
+- todo  #19065 : upgraded to Rails 2.0.2 (should be OK with 1.2.6) - s1632
+
+
+== densha - 0.9.17    released 2007/03/17
+
+- todo  #18794 : implemented special user store (inbox) - s1612
+- todo  #18717 : implemented download/upload of exps as yaml - s1602
+- todo  #18659 : turned densha-workitem into densha-hash and integrated
+                 it into /process/edit - s1584
+- todo  #18648 : adapted search to special 'users' store - s1574
+- todo  #18642 : eadmin --> processes, wadmin --> worklist, ... - s1573
+- bug   #18636 : broken " and ' handling in workitem edition. Fixed - s1567
+- todo  #18633 : added :gem_install_workflow_engine rake task - s1566
+- todo  #18471 : implemented first iteration of 'process gardening' - s1553
+- todo  #16684 : ordering processes by launchtime in /eadmin - s1546
+- todo  #16368 : implemented batch ops in /eadmin - s1544
+- todo  #16814 : 'abort' instead of 'cancel' in /eadmin - s1543
+- todo  #18468 : added process definition upload to /wadmin - s1543
+- todo  #17950 : added :install_workflow_engine rake task - s1501
+- todo  #16734 : better error message when launchp references inexistent
+                 proc definition - s1409 (first OpenWFEru commit of year 2008)
+- todo  #16369 : now displaying process status tags in /eadmin - s1386
+- bug   #15786 : fixed edit/view loop - s1295
+- todo  #15787 : reorganized the workitem edit/view system - s1283
+- todo  #15784 : implemented "launch and follow" - s1281
+
+
+== densha - 0.9.16    released 2007/11/19
+
+- patch #15496 : missing passwd in worklist admin. Patched by Amedeo - s1243
+- patch #15497 : 'launch this process' link fixed by Amedeo Paglione - s1242
+- todo  #13883 : added workitem search system.
+- bug   #15448 : store participant administration broken. Fixed - s1236
+- todo  #15432 : upgraded to prototype 1.6.0 - s1234
+- todo  #15280 : added 'participant' and 'upon' params for activity feed - s1231
+- bug   #15278 : 'replay error' did not remove error. Fixed - s1225
+- todo  #15274 : wired activity Atom feed at /activity - s1217
+- todo  #15125 : switched to Rails 1.2.5 - s1201
+- todo  #15096 : renamed extras' OwfeTables to WorkitemTables - s1193
+- todo  #14805 : displaying process description in densha-fluo - s1182
+- todo  #14830 : integrated SyntaxHighlighter in the definitions view - s1173
+- todo  #14789 : new field gets focus in generic workitem form - s1171
+- todo  #14785 : upgraded to prototype 1.6.0rc1 - s1170
+- todo  #14693 : implemented get_description - s1163
+- todo  #14680 : cancelling a process replies faster (asynchronous) - s1161
+- todo  #14090 : added 'launched' to eadmin/ - s1141
+
+
+== densha - 0.9.15    released 2007/09/24
+
+- todo  #14078 : cancel process does not load the whole page anymore - s1088
+- todo  #14507 : replaced 'key' by 'fkey' in active Workitem - s1078
+
+
+== densha - 0.9.14    released 2007/09/18
+
+- todo  #13818 : custom forms ok via "__form_template" - s1053
+- todo  #13925 : implemented the error 'replay' button - s1048
+- patch #13915 : integrated Juan Pedro pause/resume patch - s1040
+- patch #13862 : integrated Juan Pedro error display patch - s1029
+- todo  #13847 : wrapped proc def parsing for in rescue block - s1025
+- patch #13806 : integrated Juan Pedro eadmin 'cancel process' feature - s1016
+- todo  #13772 : implemented fluo CaseExpression based on Juan-Pedro Paredes'
+                 BranchExpression - s1011
+- todo  #13774 : setup vlad the deployer for densha (Alain Hoang)
+- todo  #13737 : added 'edit' button to workitem.view - s1006
+- todo  #13738 : made 'edit' conditional and refactored Worklist model - s1004
+- todo  #13736 : added 'launch' button to process view - s1003
+- todo  #13729 : implemented hide/show minor expressions for 'fluo' - s1002
+- todo  #13679 : added 'unlock' to admin powers and now preventing
+                 actions on unlocked workitems - s1001
+- todo  #13473 : added dispatch_time and last_modified to display - s940
+- todo  #13414 : implemented workitem locks system - s932
+- bug   #13296 : persistence was always going to ./work. Fixed - s896
+

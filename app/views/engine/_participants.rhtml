@@ -1,0 +1,29 @@
+
+<div 
+    class="engine_par_row"
+>
+    <div class="engine_par_header engine_par_regex">participant name (regex)</div>
+    <div class="engine_par_header engine_par_participant">participant type</div>
+    <div style="clear: both;"></div>
+</div>
+<%
+    @participants.each do |tuple|
+
+        regex = tuple[0].source[1..-2]
+        participant = participant_to_s(tuple[1])
+
+        row_id = "par_row_#{regex.hash}"
+-%>
+<div 
+    id="<%= row_id %>"
+    class="engine_par_row"
+    onmouseover="<%= omover(row_id, 'row_over') %>"
+    onmouseout="<%= omout(row_id, 'row_over') %>"
+>
+    <div class="engine_par_regex">'<%= regex %>'</div>
+    <div class="engine_par_participant"><%= participant %></div>
+    <div style="clear: both;"></div>
+</div>
+<%
+    end
+-%>

@@ -1,0 +1,31 @@
+/*
+ * workitems.css
+ */
+
+.wis_count 
+{
+    font-size: 10px;
+    float: right;
+}
+.wis_search_form
+{
+    float: left;
+}
+.wis_workitem
+{
+    font-size: 10px;
+    /*padding-bottom: 7px;*/
+    margin-bottom: 7px;
+    padding-left: 2px;
+    border-left: 3px #aeaeae solid;
+}
+.wis_workitem_head
+{
+}
+.wis_workitem_body
+{
+}
+.wis_workitem_foot
+{
+}
+

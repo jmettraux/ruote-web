@@ -1,0 +1,14 @@
+<h3>store permissions</h3>
+
+<div class="worklist_category_description">
+assigning permissions (read - write - delegate) to groups of users
+</div>
+
+<%= 
+    render_record_table(
+        StorePermission,
+        records,
+        [ [ :storename, "33%" ], 
+          [ :groupname, "33%" ], 
+          [ :permission, "10%", "prm" ] ])
+-%>

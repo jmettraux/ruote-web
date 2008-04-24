@@ -1,0 +1,59 @@
+
+CREDITS
+=======
+
+OpenWFEru is an open source Ruby workflow / BPM engine made in Japan.
+
+OpenWFEru densha is a Ruby on Rails based web application around an OpenWFEru engine.
+
+
+The main project team
+---------------------
+
+John Mettraux ( project lead ( john >at< openwfe.org ) )
+
+
+Contributors
+------------
+
+Arjan van Bentem (activity partial patch)
+Amedeo Paglione (patches)
+Juan Pedro Paredes (patches)
+Ron Fox Kendou (concurrence bug)
+
+
+Sponsors
+--------
+
+(none)
+
+
+Donators
+--------
+
+(none)
+
+
+Feedback
+--------
+
+Jim Jin (store modification bug report)
+Shivakumar Gopalakrishnan
+Jon (Compensator)
+
+
+Misc
+----
+
+The OpenWFE logo was designed by Phosphore (http://phosphore.ch)
+The 'ru' was added by Jamandru Reynolds (http://geometron.net)
+
+
+Tools / Libraries
+-----------------
+
+- Ruby on Rails  http://rubyonrails.org
+- Prototype  http://prototypejs.org
+- Json  http://json.org  http://json.rubyforge.org
+- Styler  http://the.railsi.st
+

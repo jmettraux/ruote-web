@@ -1,0 +1,4 @@
+
+page.replace_html "flash", "process instance #{@row_wfid} got resumed"
+page.replace_html "processes_row_#{@row_wfid}", :partial => "process_status"
+

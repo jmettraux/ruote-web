@@ -1,0 +1,131 @@
+<%
+    return unless @row_status
+
+    sta = @row_status
+    wfid = @row_wfid
+
+    # flow expression id
+
+    fei = begin
+        @row_status.expressions[0].fei
+    rescue
+        nil
+    end
+
+    # process name and revision
+
+    wfname, wfrevision = if fei
+        [ fei.wfname, fei.wfrevision ]
+    else
+        [ "", "" ]
+    end
+
+    launch_time = render_time(sta, :launch_time)
+-%>
+
+    <td class="processes_small"><%= h(wfid) %></td>
+    <td><%= h(wfname) %> <%= h(wfrevision) %></td>
+    <td class="processes_small"><%= h(launch_time) %></td>
+    <td class="processes_small"><%= sta.branches %></td>
+    <td class="processes_small"><%= sta.errors.length %></td>
+    <td class="processes_small"><%= sta.paused? ? "<i>in pause</i>" : "running" %></td>
+    <td class="processes_small"><%= h(sta.tags.join(", ")) %></td>
+    <td class="processes_ps_buttons">
+        <%
+            if sta.errors.length > 0
+        -%>
+        <span
+            id="show_error_<%= wfid %>_a" 
+        >
+            <%= link_to_remote( 
+                "errors",
+                {
+                    :update => @row_id,
+                    :position => :after,
+                    :url => { 
+                        :action => 'show_process_errors', :id => wfid },
+                    :loaded => "toggleButtons('show_error_"+wfid+"')"
+                },
+                {
+                    :title => "displays error details"
+                })
+            -%>
+        </span>
+        <span 
+            id="show_error_<%= wfid %>_b" 
+            style="display: none;"
+        >
+            <%= link_to_function(
+                "hide errors",
+                "toggleButtons('show_error_"+wfid+"')",
+                :title => "hide error details")
+            -%>
+        </span>
+        <script>
+            $('show_error_<%= wfid %>_a').toggle_hook = function () {
+                hideErrors('<%= wfid %>');
+            };
+        </script>
+    |
+        <%
+            end
+        -%>
+        <%=
+            link_to_remote(
+                'abort', 
+                { 
+                    #:update => @row_id,
+                    :url => { :action => 'cancel_process', :id => wfid },
+                    :confirm => "Abort (cancel) process '#{wfid}' ?",
+                    :loaded => "hideErrors('#{wfid}');"
+                },
+                { 
+                    :title => "cancels the process instance entirely"
+                })
+        -%> 
+    |
+        <%
+            action_name = 'pause'
+            action = 'pause_process'
+            action_title = 'put this process in pause'
+            action_loaded = ''
+
+            if sta.paused?
+                action_name = 'resume'
+                action = 'resume_process'
+                action_title = 'let this process resume'
+                action_loaded = "hideErrors('#{wfid}');"
+            end
+        -%>
+        <%= 
+            link_to_remote( 
+                action_name,
+                {
+                    #:update => @row_id,
+                    :url => { :action => action, :id => wfid },
+                    :loaded => action_loaded
+                },
+                {
+                    :title => action_title
+                })
+        -%>
+    |
+        <%=
+            link_to(
+                "edit",
+                {
+                    :controller => :process,
+                    :id => wfid
+                },
+                {
+                    :title => "work on the expression tree directly"
+                })
+        -%>
+        <input 
+            name="<%= wfid %>" 
+            value="batch"
+            type="checkbox" 
+            class="processes_checkbox" 
+        />
+   </td>
+

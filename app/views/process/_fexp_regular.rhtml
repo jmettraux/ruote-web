@@ -1,0 +1,97 @@
+
+<%
+  depth = fexp.fei.expression_id.count "."
+  style = "margin-left: #{depth * 11}px; padding-left: 3px; margin-top: 1px"
+  fei = fexp.fei
+
+  apply_time, dclass = if fexp.apply_time
+
+    d = (Time.now - fexp.apply_time).to_i
+    
+    [ render_time(fexp, :apply_time) + "<br/>",
+      "process_expression" ]
+  else
+
+    [ "", 
+      "process_unapplied_expression" ]
+  end
+
+  attributes = if fexp.is_a?(OpenWFE::RawExpression)
+    fexp.extract_attributes.inspect
+  else
+    fexp.attributes.inspect
+  end
+
+  mov = 
+    "highlightExpression('#{fei.expid}'); " + 
+    omover("fexp_#{fei.expid}", "process_exp_over")
+  mot = 
+    "noHighlight('#{fei.expid}'); " +
+    omout("fexp_#{fei.expid}", "process_exp_over")
+
+  onmouse = "onmouseover=\"#{mov}\" onmouseout=\"#{mot}\""
+
+  c_text, c_title = if fexp.fei.expid == "0"
+    [ "abort",
+      "aborts (cancels) the whole process" ]
+  elsif fexp.apply_time 
+    [ "abort",
+      "cancels just this expression (and its sub expressions)" ]
+  else
+    [ "remove",
+      "remove expression before it gets applied (truncate process)" ]
+  end
+
+  view_wi = if fexp.respond_to?(:applied_workitem) and fexp.applied_workitem
+
+    wi = fexp.applied_workitem.attributes.to_json.to_s
+
+    #t = fei.expid
+    tt = "edit the workitem payload"
+    if fexp.is_a?(OpenWFE::ParticipantExpression)
+        #t += " (participant #{fexp.applied_workitem.participant_name})"
+        tt = "edit the workitem payload (will get overriden by participant though)"
+    end
+
+    "(" + link_to_function(
+      "edit workitem", 
+      "editWorkitem(#{fei.to_h.to_json.to_s}, #{wi})",
+      :title => tt) + ")"
+  else
+    ""
+  end
+
+  view_yaml = if @show_unapplied
+    "(" + link_to(
+      "as yaml",
+      :controller => 'expression',
+      :wfid => fei.wfid,
+      :id => fei.expid.gsub(/\./, '_'),
+      :format => "yaml") + ")"
+  else
+    ""
+  end
+-%>
+<div 
+  id="fexp_<%= fei.expid %>"
+  class="<%= dclass %>"
+  style="<%= style %>"
+  <%= onmouse %>
+>
+  <%= fei.expid %> <b><%= fei.expname %></b><br/>
+  <%= attributes %><br/>
+  <%= apply_time %>
+  <%=
+    link_to(
+        c_text,
+        { :action => :abort, 
+          :id => @wfid,
+          :expid => fei.expid,
+          :show_unapplied => @show_unapplied },
+        { 
+          :confirm => "Are you sure ?",
+          :title => c_title })
+  -%>
+  <%= view_wi %> <%= view_yaml %>
+</div>
+

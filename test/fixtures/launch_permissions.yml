@@ -1,0 +1,7 @@
+#
+# launch permissions
+#
+lp1:
+  id: 1
+  groupname: ""
+  url: /process_definitions/test.rb

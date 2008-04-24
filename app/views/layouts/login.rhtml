@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>densha : login</title>
+    <%= stylesheets %>
+    <%= javascript_include_tag "prototype" %>
+</head>
+<body>
+    <div id="content">
+        <div id="banner">
+            <div id="openwfe-logo">
+                <a href="http://openwferu.rubyforge.org"><img src="/images/openwfe-logo.png"/></a>
+            </div>
+        </div>
+
+        <div id="breadcrumbs">
+            <div style="float:left">
+                open source ruby workflow and bpm engine
+            </div>
+            <div style="float:right">
+                please log in
+            </div>
+        </div>
+
+        <div id="postbreadcrumbs">
+        </div>
+
+        <div id="flash"><%= flash[:notice] %></div>
+
+        <div id="corebox">
+            <%= yield :layout %>
+        </div>
+
+        <div id="footer">
+            (c) 2007-2008 OpenWFE.org
+        </div>
+    </div>
+</body>
+</html>
+

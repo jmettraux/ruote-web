@@ -1,0 +1,41 @@
+
+<%
+    @launch_permissions.each_with_index do |permission, i|
+
+        lpid = "launchp-#{i}"
+-%>
+<div 
+    id="<%= lpid %>"
+    class="launchp"
+    onmouseover="<%= omover lpid, 'row_over' %>"
+    onmouseout="<%= omout lpid, 'row_over' %>"
+>
+    <div class="launchp_info">
+        <span class="launchp_url">
+            <a 
+                href="<%= h(permission.url) %>"
+                title="direct link to the process definition [document]"
+            ><%= h(permission.url) %></a>
+        </span>
+        <span class="launchp_groupname"><%= h(permission.groupname) %></span>
+        <span class="launchp_description"><%= get_description(permission) %></span>
+    </div>
+    <div 
+        class="launchp_buttons"
+    ><%= 
+        link_to(
+            "launch", :action => "launch", :id => permission.id)
+    -%> | <%= 
+        link_to(
+            "view", :controller => "definition", :id => permission.id)
+    -%></div>
+    <div style="clear: both;"></div>
+</div>
+<%
+    end
+-%>
+
+<div class="explanation">
+The processes your user is allowed to launch are listed here. You can directly launch a process or review it and then launch it.
+</div>
+

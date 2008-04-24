@@ -1,0 +1,10 @@
+<h3>groups</h3>
+<div class="worklist_category_description">
+mapping users to groups
+</div>
+<%= 
+    render_record_table(
+        Group,
+        records,
+        [ [ :name, "50%" ], :username ])
+-%>

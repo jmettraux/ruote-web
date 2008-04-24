@@ -1,0 +1,48 @@
+
+<div class="login_info">
+    <p>
+This 'densha' is an example <a href="http://rubyonrails.org">Ruby On Rails&trade;</a> web application wrapping an <a href="http://openwferu.rubyforge.org">OpenWFEru</a> engine.
+    </p>
+    <p>
+Each user of 'densha' has access to certain workitem stores and can also launch process instances.
+    </p>
+    <p>
+<b>Warning</b> : as of now, this web application is only meant for <a href="http://getfirefox.com" title="Get Firefox !">Firefox</a> and Safari.
+    </p>
+    <!--p>
+Log in as 'alice', 'bob' or 'admin', the password is just the username. Play around, launch processes and push workitems around.
+    </p>
+    <p>
+There is an <a href="http://openwferu.rubyforge.org/rquickstart.html">OpenWFEru on rails quickstart</a> for local installs of this 'densha' web application.
+    </p-->
+</div>
+
+<div class="login_form">
+    <% form_tag do %>
+        <div class="login_key">
+            <label for="name">username </label>
+        </div>
+        <div class="login_value">
+            <%= text_field_tag :name, params[:name], { :id => "tf_username" } %>
+        </div>
+        <div class="login_key">
+            <label for="password">password </label>
+        </div>
+        <div class="login_value">
+            <%= password_field_tag :password %>
+        </div>
+        <div class="login_key">
+            &nbsp;
+        </div>
+        <div class="login_value">
+            <%= submit_tag "Login" %>
+        </div>
+    <% end %>
+</div>
+
+<div style="clear: both;"></div>
+
+<script>
+    $('tf_username').focus();
+</script>
+

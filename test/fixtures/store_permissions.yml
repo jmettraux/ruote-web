@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+sp1:
+  id: 1
+  storename: alpha
+  groupname: sales
+  permission: rwd
+sp2:
+  id: 2
+  storename: alpha
+  groupname: production
+  permission: r
+sp3:
+  id: 3
+  storename: bravo
+  groupname: sales
+  permission: rw

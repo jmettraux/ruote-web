@@ -1,0 +1,89 @@
+/*
+ * stores.css
+ */
+
+.store_search_form
+{
+    padding-top: 9px;
+    text-align: right;
+}
+.store
+{
+    padding-bottom: 10px;
+}
+.store_row
+{
+    width: 100%;
+}
+.store_header
+{
+    font-size: 12px;
+    border-bottom: 1px dotted #777;
+    padding-bottom: 3px;
+}
+.store_name
+{
+    position: relative;
+    float: left;
+}
+.store_name_name
+{
+    font-weight: bold;
+    color: #0083CA;
+}
+.store_wi_count
+{
+    position: relative;
+    float: right;
+}
+.store_wi_info
+{
+    font-size: 11px;
+    width: 90%;
+    float: left;
+}
+.store_wi_locked 
+{
+    width: 1%;
+    float: left;
+}
+.store_wi_id 
+{
+    width: 5%;
+    text-align: right;
+    padding-right: 4px;
+    float: left;
+}
+.store_wi_wfid 
+{
+    width: 22%;
+    float: left;
+}
+.store_wi_pname
+{
+    width: 10%;
+    float: left;
+}
+.store_wi_process
+{
+    width: 16%;
+    float: left;
+}
+.store_wi_activity 
+{
+    width: 17%;
+    float: left;
+}
+.store_wi_dispatch_time
+{
+    font-size: 10px;
+    width: 28%;
+    float: right;
+}
+.store_wi_buttons
+{
+    width: 9%;
+    font-size: 10px;
+    float: right;
+    text-align: right;
+}

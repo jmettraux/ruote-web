@@ -1,0 +1,41 @@
+
+<%
+  depth = fexp.fei.expression_id.count "."
+  style = "margin-left: #{depth * 11}px; padding-left: 3px; margin-top: 1px"
+  fei = fexp.fei
+
+  #link_to(
+  #    c_text,
+  #    { :action => :abort, 
+  #      :id => @wfid,
+  #      :expid => fei.expid,
+  #      :show_unapplied => @show_unapplied },
+  #    { 
+  #      :confirm => "Are you sure ?",
+  #      :title => c_title })
+
+  vars = fexp.variables.inject({}) { |r, (k, v)|
+    r[k] = v if v.is_a?(String)
+    r
+  }.to_json.to_s
+
+  view_variables = "(" + link_to_function(
+    "edit variables",
+    "editVariables(#{fei.to_h.to_json.to_s}, #{vars})",
+    :title => "edit the variables set at this point of the process instance") + ")"
+
+  view_yaml = "(" + link_to(
+    "as yaml",
+    :controller => 'expression',
+    :wfid => fei.wfid,
+    :id => fei.expid.gsub(/\./, '_') + "e",
+    :format => "yaml") + ")"
+-%>
+<div 
+  id="fexp_<%= fei.expid %>e"
+  class="process_unapplied_expression"
+  style="<%= style %>"
+>
+  <%= fei.expid %> <b><%= fei.expname %></b> <%= view_variables %> <%= view_yaml %>
+</div>
+

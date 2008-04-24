@@ -1,0 +1,4 @@
+set :application, "densha"
+set :domain,      "difference.openwfe.org"
+set :deploy_to,   "/path/to/densha/deploy"
+set :repository,  "svn://rubyforge.org/var/svn/openwferu/trunk/densha"

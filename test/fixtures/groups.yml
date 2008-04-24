@@ -1,0 +1,13 @@
+
+g1:
+  id: 1
+  name: sales
+  username: alice
+g2:
+  id: 2
+  name: production
+  username: bob
+g3:
+  id: 3
+  name: production
+  username: charly
