@@ -109,9 +109,25 @@ module WorkitemHelper
 
   TEMPLATE_PREFIX = "#{RAILS_ROOT}/app/views/workitem/_"
 
+  #
+  # Finds the partial for a workitem (view or edition).
+  #
+  # This is mainly used for custom forms.
+  #
+  # Thanks to Arjan van Bentem, partials based on [participant] activity
+  # are OK.
+  #
   def find_partial (key, default)
 
     t_name = @workitem.fields_hash[key]
+
+    if (t_name == nil) and (key == '__workitem_partial')
+
+      activity = @workitem.params['activity']
+      t_name = activity.downcase.gsub(/[^a-z0-9]/, '_') if activity
+    end
+      #
+      # potential special partial for that [participant] activity
 
     return default unless t_name
 

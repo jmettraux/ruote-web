@@ -4,6 +4,8 @@
 
 == densha - 0.9.18    not yet released
 
+- patch #19684 : patch for custom forms (partials) determined by [participant]
+                 activity (by Arjan van Bentem)
 - todo  #19747 : implement 'pick workitem' as suggested by Arjan van Bentem
 - switched to http://github.com/jmettraux/ruote-web
 - todo  #19065 : upgraded to Rails 2.0.2 (should be OK with 1.2.6) - s1632
