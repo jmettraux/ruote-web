@@ -119,11 +119,13 @@ module WorkitemHelper
   #
   def find_partial (key, default)
 
-    t_name = @workitem.fields_hash[key]
+    wi_fields = @workitem.fields_hash
+
+    t_name = wi_fields[key]
 
     if (t_name == nil) and (key == '__workitem_partial')
 
-      activity = @workitem.params['activity']
+      activity = wi_fields['params']['activity']
       t_name = activity.downcase.gsub(/[^a-z0-9]/, '_') if activity
     end
       #

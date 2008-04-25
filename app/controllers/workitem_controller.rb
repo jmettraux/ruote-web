@@ -138,6 +138,7 @@ class WorkitemController < ApplicationController
     # overwrite with preserved fields
 
     fields.merge! preserved_fields
+    fields['last_modified_by'] = user.name
 
     workitem.touch # setting last_modified to now
     workitem.replace_fields fields # calls workitem.save!
