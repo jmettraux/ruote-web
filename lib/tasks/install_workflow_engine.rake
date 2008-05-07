@@ -19,9 +19,12 @@ task :install_workflow_engine do
 
   sh "rm -fR vendor/ruote"
   sh "rm -fR vendor/rufus"
+  sh "mkdir vendor"
 
   RUFUSES.each { |e| git_clone(e) }
-  git_clone("ruote")
+  git_clone "ruote"
+
+  sh "sudo gem install -y json_pure"
 end
 
 def git_clone (elt)

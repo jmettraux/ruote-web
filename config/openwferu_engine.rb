@@ -39,12 +39,8 @@ ac[:work_directory] = "work_#{RAILS_ENV}"
   # (note that workitems are stored via ActiveRecord as soon as they are
   #  assigned to an ActiveStoreParticipant)
 
-ac[:logger] = Logger.new("log/openwferu_#{RAILS_ENV}.log", 10, 1024000)
-ac[:logger].level = if RAILS_ENV == "production" 
-  Logger::INFO
-else
-  Logger::DEBUG
-end
+ac[:logger] = Logger.new "log/openwferu_#{RAILS_ENV}.log", 10, 1024000
+ac[:logger].level = (RAILS_ENV == 'production') ? Logger::INFO : Logger::DEBUG
 
 ac[:ruby_eval_allowed] = true
   #
