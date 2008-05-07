@@ -47,7 +47,8 @@ module WorkitemHelper
 
     s = ""
 
-    from_view = (request.env['HTTP_REFERER'].match("/view/") != nil)
+    from_view = request.env['HTTP_REFERER'] && 
+        (request.env['HTTP_REFERER'].match(/\/view\//) != nil)
 
     s << link_to(
       "back", 

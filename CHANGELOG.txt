@@ -4,6 +4,7 @@
 
 == densha - 0.9.18    not yet released
 
+- patch #20014 : nil HTTP_REFERER patch by Arjan
 - patch #19759 : "last_modified_by" patch by Arjan
 - patch #19684 : patch for custom forms (partials) determined by [participant]
                  activity (by Arjan van Bentem)

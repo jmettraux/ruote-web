@@ -16,7 +16,7 @@ John Mettraux ( project lead ( john >at< openwfe.org ) )
 Contributors
 ------------
 
-Arjan van Bentem (activity partial patch)
+Arjan van Bentem (patches)
 Amedeo Paglione (patches)
 Juan Pedro Paredes (patches)
 Ron Fox Kendou (concurrence bug)
