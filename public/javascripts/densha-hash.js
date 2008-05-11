@@ -449,10 +449,21 @@ var DenshaHash = function () {
             $('hash_form').submit();
         },
         
-        removeEntry : function (buttonId) {
+        removeEntry : function (button_id) {
         
-            var button = $(buttonId);
+            var button = $(button_id);
             button.parentNode.parentNode.remove();
+        },
+
+        doDelegate : function (store_name) {
+
+            var e = new Element(
+                "input", 
+                { 'type': 'hidden', 'name': 'store_name', 'value': store_name });
+
+            $('hash_form').appendChild(e);
+
+            DenshaHash.doSubmit('delegate');
         }
     };
 

@@ -119,3 +119,28 @@ var DenshaDial = function() {
         newDialog : newDialog
     };
 }();
+
+var RuoteMisc = function() {
+
+    function link (href, text, attributes) {
+
+        var atts = { "href": href };
+
+        for (var key in attributes) {
+            atts[key] = attributes[key];
+        };
+
+        var l = new Element("a", atts);
+        l.innerHTML = text;
+
+        return l;
+    }
+
+    return {
+
+        //
+        // public stuff
+
+        link : link
+    };
+}();

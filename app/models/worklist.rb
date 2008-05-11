@@ -69,10 +69,10 @@ class Worklist
 
     @user = user
 
-    @permissions = find_permissions()
-    @store_names = find_store_names()
+    @permissions = find_permissions
+    @store_names = find_store_names
 
-    @workitems = OpenWFE::Extras::Workitem.find_in_stores(@store_names)
+    @workitems = OpenWFE::Extras::Workitem.find_in_stores @store_names
   end
 
   #
@@ -103,6 +103,21 @@ class Worklist
     return load_user_workitems if store_name == 'users'
 
     @workitems[store_name] || []
+  end
+
+  #
+  # Returns the list of store[ names]s to which the user can delegate.
+  #
+  # If a workitem is passed, makes sure to remove the workitem current
+  # store name from the resulting list.
+  #
+  def delegation_targets (workitem=nil)
+
+    names = @store_names.find_all { |n| permission(n).may_delegate? }
+
+    names.delete(workitem.store_name) if workitem
+
+    names
   end
 
   #

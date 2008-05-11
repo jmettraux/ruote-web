@@ -1,6 +1,43 @@
 
 <%= javascript_include_tag "densha-hash" %>
 
+<%= javascript_include_tag "densha-dial" %>
+
+<script>
+
+  var delegationTargets = <%= @delegation_targets.to_json %>;
+
+  function showDelegationDialog () {
+
+    //if (hasClosedDialog()) return;
+
+    var d = DenshaDial.newDialog(
+        "delegate workitem to another store", 
+        300, 
+        56 + delegationTargets.length * 28);
+
+    for (var i = 0; i < delegationTargets.length; i++) {
+
+        var storename = delegationTargets[i];
+
+        var el = new Element("div");
+
+        //el.appendChild(
+
+        el.appendChild(RuoteMisc.link(
+            "#", 
+            storename, 
+            { 'title': "delegate this workitem to the store '"+storename+"'",
+              'onclick': "DenshaHash.doDelegate('"+storename+"');" }));
+
+        d.body.appendChild(el);
+    }
+
+    return d;
+  }
+
+</script>
+
 <%
   fei = @workitem.full_fei
   process = "#{fei.wfname} #{fei.wfrevision}"

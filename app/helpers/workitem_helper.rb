@@ -76,12 +76,22 @@ module WorkitemHelper
 
     else
 
-      html = \
+      html =
         link_to_function(
           "save", 
           "DenshaHash.doSubmit('save');", 
-          :title => "saves the workitem, but don't let it resume in the process for now") +
-        " | delegate" +
+          :title => "saves the workitem, but don't let it resume in the process for now")
+
+      if @delegation_targets.size > 0
+        html += 
+          " | " +
+          link_to_function(
+            "delegate",
+            "showDelegationDialog();",
+            :title => "places the workitem in another store")
+      end
+
+      html +=
         " | " +
         link_to_function(
           "proceed", 
@@ -89,7 +99,7 @@ module WorkitemHelper
           :title => "saves the workitem and make it resume in the process")
 
       if @workitem.store_name != 'users'
-        html += \
+        html +=
          " | " + 
          link_to(
            "pick", 

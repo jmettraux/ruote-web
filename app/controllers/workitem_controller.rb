@@ -78,6 +78,10 @@ class WorkitemController < ApplicationController
     redirect_to :controller => "stores"
   end
 
+  def delegate
+    raise "baka !"
+  end
+
   #
   # opens a workitem in view-only mode
   #
@@ -105,6 +109,7 @@ class WorkitemController < ApplicationController
     workitem = OpenWFE::Extras::Workitem.find workitem_id
 
     action = params[:hash_form_action]
+    store_name = params[:store_name]
 
     return error_wi_not_owner(action) \
       unless Densha::Locks.owns_lock?(user, workitem.id)
@@ -140,15 +145,21 @@ class WorkitemController < ApplicationController
     fields.merge! preserved_fields
     fields['last_modified_by'] = user.name
 
+    workitem.store_name = store_name if action == 'delegate'
+
     workitem.touch # setting last_modified to now
     workitem.replace_fields fields # calls workitem.save!
 
-    if (action == "save")
+    if (action == 'save')
 
       #workitem.save!
         # already performed by replace_fields
 
       flash[:notice] = "workitem got saved."
+
+    elsif (action == 'delegate')
+
+      flash[:notice] = "workitem got delegated to store #{store_name}"
 
     else # action is 'proceed'
 
@@ -159,7 +170,7 @@ class WorkitemController < ApplicationController
       flash[:notice] = "workitem got proceeded."
     end
 
-    Densha::Locks.unlock_workitem(user, workitem.id)
+    Densha::Locks.unlock_workitem user, workitem.id
 
     return_to_previous_page
   end
@@ -254,6 +265,8 @@ class WorkitemController < ApplicationController
       @worklist = Worklist.new(session[:user])
   
       @workitem = OpenWFE::Extras::Workitem.find workitem_id
+
+      @delegation_targets = @worklist.delegation_targets(@workitem)
   
       @fields, preserved_fields = filter_fields @workitem
   
