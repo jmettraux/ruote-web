@@ -19,7 +19,7 @@ task :install_workflow_engine do
 
   sh "rm -fR vendor/ruote"
   sh "rm -fR vendor/rufus"
-  sh "mkdir vendor"
+  FileUtils.mkdir "vendor" unless File.exists?("vendor")
 
   RUFUSES.each { |e| git_clone(e) }
   git_clone "ruote"
