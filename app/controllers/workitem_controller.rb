@@ -51,12 +51,7 @@ class WorkitemController < ApplicationController
   #
   def edit
 
-    wid = params[:id]
-
-    return error_wi_not_found \
-        unless OpenWFE::Extras::Workitem.exists?(wid)
-    return error_wi_locked \
-        unless Densha::Locks.lock_workitem(session[:user], wid)
+    wid = get_wid or return
 
     load_workitem wid
   end
@@ -66,12 +61,7 @@ class WorkitemController < ApplicationController
   #
   def pick
 
-    wid = params[:id]
-
-    return error_wi_not_found \
-        unless OpenWFE::Extras::Workitem.exists?(wid)
-    return error_wi_locked \
-        unless Densha::Locks.lock_workitem(session[:user], wid)
+    wid = get_wid or return
 
     pick_workitem wid
 
@@ -87,7 +77,8 @@ class WorkitemController < ApplicationController
 
     wid = params[:id]
 
-    return error_wi_not_found unless OpenWFE::Extras::Workitem.exists?(wid)
+    return error_wi_not_found \
+      unless OpenWFE::Extras::Workitem.exists?(wid)
 
     load_workitem wid
 
@@ -100,7 +91,7 @@ class WorkitemController < ApplicationController
   def update
 
     user = session[:user]
-    workitem_id, preserved_fields = session[:workitem]
+    workitem_id = session[:workitem]
 
     workitem = OpenWFE::Extras::Workitem.find workitem_id
 
@@ -135,10 +126,6 @@ class WorkitemController < ApplicationController
       fields = params
     end
 
-    #
-    # overwrite with preserved fields
-
-    fields.merge! preserved_fields
     fields['last_modified_by'] = user.name
 
     workitem.store_name = store_name if action == 'delegate'
@@ -190,6 +177,23 @@ class WorkitemController < ApplicationController
 
   protected
 
+    def get_wid
+
+      wid = params[:id]
+
+      unless OpenWFE::Extras::Workitem.exists?(wid)
+        error_wi_not_found
+        return nil
+      end
+
+      unless Densha::Locks.lock_workitem(session[:user], wid)
+        error_wi_locked
+        return nil
+      end
+
+      wid
+    end
+
     #
     # Returns to the previous page
     #
@@ -228,27 +232,14 @@ class WorkitemController < ApplicationController
     end
 
     #
-    # From the initial fields hash, produces two hashes, the first one
-    # being viewable and editable, while the second will not be seen
-    # and will be preserved from user manipulation.
+    # filters out fields starting with an _
     #
     def filter_fields (workitem)
 
-      fields = {}
-      preserved_fields = {}
-      
-      @workitem.fields_hash.each do |k, v|
-        
-        if k[0, 1] == "_"
-
-            preserved_fields[k] = v
-        else
-
-            fields[k] = v
-        end
+      @workitem.fields_hash.inject({}) do |r, (k, v)|
+        r[k] = v if k[0, 1] != '_'
+        r
       end
-
-      [ fields, preserved_fields ]
     end
 
     #
@@ -264,9 +255,9 @@ class WorkitemController < ApplicationController
 
       @delegation_targets = @worklist.delegation_targets(@workitem)
   
-      @fields, preserved_fields = filter_fields @workitem
+      @fields = filter_fields @workitem
   
-      session[:workitem] = @workitem.id, preserved_fields
+      session[:workitem] = @workitem.id
 
       @process_definition, @json_process_definition = \
         LaunchPermission.load_process_definition(
