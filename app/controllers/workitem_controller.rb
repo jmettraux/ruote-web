@@ -78,10 +78,6 @@ class WorkitemController < ApplicationController
     redirect_to :controller => "stores"
   end
 
-  def delegate
-    raise "baka !"
-  end
-
   #
   # opens a workitem in view-only mode
   #

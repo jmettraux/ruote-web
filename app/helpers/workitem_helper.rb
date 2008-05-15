@@ -136,7 +136,8 @@ module WorkitemHelper
 
     if (t_name == nil) and (key == '__workitem_partial')
 
-      activity = wi_fields['params']['activity']
+      params = wi_fields['params'] || {}
+      activity = params['activity']
       t_name = activity.downcase.gsub(/[^a-z0-9]/, '_') if activity
     end
       #

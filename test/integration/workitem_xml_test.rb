@@ -13,6 +13,8 @@ class WorkitemXmlTest < ActionController::IntegrationTest
 
   def test_0
 
+    $openwferu_engine.ac[:definition_in_launchitem_allowed] = true
+
     $openwferu_engine.register_participant :testp do |workitem|
       assert_equal workitem.xml_stuff.class, REXML::Text
       assert_equal workitem.xml_stuff.to_s, 'whatever'

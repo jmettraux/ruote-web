@@ -1,0 +1,24 @@
+wi1:
+  id: 777
+  fei: (fei 0.9.18 engine public/process_definitions/simple_concurrence_1.rb SimpleConcurrence 1 20080514-gobikojeza participant 0.0.0.0)
+  wfid: 20080514-gobikojeza 
+  wf_name: Test
+  wf_revision: zero
+  participant_name: alpha
+  store_name: alpha
+wi2:
+  id: 778
+  fei: (fei 0.9.18 engine public/process_definitions/simple_concurrence_1.rb SimpleConcurrence 1 20080514-gobikojeza participant 0.0.0.1)
+  wfid: 20080514-gobikojeza 
+  wf_name: Test
+  wf_revision: zero
+  participant_name: bravo
+  store_name: bravo
+wi2:
+  id: 779
+  fei: (fei 0.9.18 engine public/process_definitions/simple_concurrence_1.rb SimpleConcurrence 1 20080514-gobikojeza participant 0.0.0.2)
+  wfid: 20080514-gobikojeza 
+  wf_name: Test
+  wf_revision: zero
+  participant_name: charly
+  store_name: alpha

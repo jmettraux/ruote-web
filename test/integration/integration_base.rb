@@ -58,6 +58,7 @@ module IntegrationBase
         def ts.enters_edition (workitem_id)
 
           get "workitem/edit/#{workitem_id}", nil, :referer => "stores"
+          #puts response.body
           assert_response :success
           assert_template "workitem/edit"
           assert_nil flash[:notice]

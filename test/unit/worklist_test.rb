@@ -3,13 +3,13 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class WiStoreTest < Test::Unit::TestCase
 
-  fixtures :wi_stores, :store_permissions, :users
+  fixtures :wi_stores, :store_permissions, :users, :groups
 
   def test_find_store_names
 
     wl = Worklist.new(users(:alice))
 
-    assert_equal wl.store_names, [ "alpha", "bravo", "users" ]
+    assert_equal [ "alpha", "bravo", "users" ], wl.store_names
   end
 
   def test_alice
