@@ -4,6 +4,8 @@
 
 == densha - 0.9.18    not yet released
 
+- todo  #20146 : calling workitems() without args yields all workitems 
+                 accessible to the user
 - todo  #19766 : implemented "delegate" (to store)
 - patch #20014 : nil HTTP_REFERER patch by Arjan
 - patch #19759 : "last_modified_by" patch by Arjan

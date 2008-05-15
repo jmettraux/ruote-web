@@ -65,6 +65,8 @@ end
 #
 class Worklist
 
+  attr_reader :user
+
   def initialize (user)
 
     @user = user
@@ -98,11 +100,18 @@ class Worklist
   #
   # Returns the workitems for the given store.
   #
-  def workitems (store_name)
+  def workitems (store_name=nil)
 
     return load_user_workitems if store_name == 'users'
+    return (@workitems[store_name] || []) if store_name
 
-    @workitems[store_name] || []
+    # then return all the workitems the user has access to
+
+    wis = load_user_workitems
+
+    @store_names.inject(wis) do |r, sname|
+      r += (@workitems[sname] || [])
+    end
   end
 
   #
