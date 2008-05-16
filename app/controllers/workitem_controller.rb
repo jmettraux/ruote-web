@@ -116,7 +116,7 @@ class WorkitemController < ApplicationController
         fields[m[1]] = params[k]
       end
         #
-        # gather the 'workitem_form_field_X' form entries as well
+        # gather the 'hash_form_field_X' form entries as well
 
     else
       #
@@ -131,7 +131,18 @@ class WorkitemController < ApplicationController
     workitem.store_name = store_name if action == 'delegate'
 
     workitem.touch # setting last_modified to now
+
+    #
+    # injecting fields as updated by the user...
+
+    current_fields, hidden_fields = filter_fields workitem
+
+    fields = fields.merge hidden_fields
+
     workitem.replace_fields fields # calls workitem.save!
+
+    #
+    # just do it...
 
     if (action == 'save')
 
@@ -232,14 +243,16 @@ class WorkitemController < ApplicationController
     end
 
     #
-    # filters out fields starting with an _
+    # filters out fields starting with an _, returns two hashes,
+    # the first of fields whose name doesn't begin with "_", and the second ...
     #
     def filter_fields (workitem)
 
-      @workitem.fields_hash.inject({}) do |r, (k, v)|
-        r[k] = v if k[0, 1] != '_'
-        r
+      fields_in, fields_out = workitem.fields_hash.partition do |k, v|
+        k[0, 1] != '_'
       end
+
+      [ a_to_h(fields_in), a_to_h(fields_out) ]
     end
 
     #
@@ -255,7 +268,7 @@ class WorkitemController < ApplicationController
 
       @delegation_targets = @worklist.delegation_targets(@workitem)
   
-      @fields = filter_fields @workitem
+      @fields, hidden_fields = filter_fields @workitem
   
       session[:workitem] = @workitem.id
 
@@ -281,6 +294,15 @@ class WorkitemController < ApplicationController
       workitem.store_name = "users"
       workitem.participant_name = user.name
       workitem.save!
+    end
+  
+    #
+    # Array to Hash (wondering why I have to write it by myself... but it's
+    # fun, maybe someone will point me to something in ActiveSupport...)
+    #
+    def a_to_h (a)
+
+      a.inject({}) { |r, e| r[e.first] = e.last; r }
     end
 
 end

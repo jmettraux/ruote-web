@@ -4,6 +4,7 @@
 
 == densha - 0.9.18    not yet released
 
+- todo  #20165 : refactored around filter_fields in the workitem controller
 - todo  #20146 : calling workitems() without args yields all workitems 
                  accessible to the user
 - todo  #19766 : implemented "delegate" (to store)
