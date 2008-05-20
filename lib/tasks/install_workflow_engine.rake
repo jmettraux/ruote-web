@@ -47,7 +47,7 @@ task :gem_install_workflow_engine do
   GEMS << "json_pure"
   #GEMS << "xml_simple"
 
-  sh "sudo gem install -y #{GEMS.join(' ')}"
+  sh "sudo gem install -y --no-rdoc --no-ri #{GEMS.join(' ')}"
 
   puts
   puts "installed gems  #{GEMS.join(' ')}"

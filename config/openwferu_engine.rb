@@ -62,9 +62,12 @@ $openwferu_engine.reload_store_participants
 
 #
 # init the Atom activity feed
+#
+# you're better off turning that off as it currently lets anybody have a look
+# at the activity
 
 $openwferu_engine.init_service(
-    'activityFeedService', OpenWFE::Extras::ActivityFeedService)
+  'activityFeedService', OpenWFE::Extras::ActivityFeedService)
 
 
 at_exit do

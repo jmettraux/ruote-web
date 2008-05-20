@@ -8,7 +8,6 @@
     </description>
     <sequence>
         <set field="message" value="hello world !" />
-        <set field="_message" value="peach john hello kitty !" />
         <participant ref="alpha" />
         <participant ref="bravo" />
     </sequence>
