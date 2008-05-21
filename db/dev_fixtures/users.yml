@@ -1,0 +1,29 @@
+#
+<% SALT = "NaCl" unless defined?(SALT) %>
+#
+# users and passwords
+#
+alice:
+  id: 1
+  name: alice
+  hashed_password: <%= User.hash_password('alice', SALT) %>
+  salt: <%= SALT %>
+  admin: false
+bob:
+  id: 2
+  name: bob
+  hashed_password: <%= User.hash_password('bob', SALT) %>
+  salt: <%= SALT %>
+  admin: false
+charly:
+  id: 3
+  name: charly
+  hashed_password: <%= User.hash_password('charly', SALT) %>
+  salt: <%= SALT %>
+  admin: false
+admin:
+  id: 4
+  name: admin
+  hashed_password: <%= User.hash_password('admin', SALT) %>
+  salt: <%= SALT %>
+  admin: true

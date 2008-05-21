@@ -16,13 +16,24 @@ require 'openwfe/extras/misc/activityfeed' # gem 'openwferu-extras'
 require 'json' # gem 'json_pure'
 
 #
-# adding the dev_data if necessary
+# checking for initial data
 
 if $0 =~ /script\/server/ and RAILS_ENV == 'development'
 
   users = User.find(:all)
 
-  require 'db/dev_data' if users.size < 1
+  if users.size < 1
+      puts
+      puts
+      puts " * no initial data *"
+      puts
+      puts "consider running"
+      puts
+      puts "    rake bootstrap_dev_db"
+      puts "    rake populate_dev_db"
+      puts
+      puts
+  end
 end
 
 #

@@ -1,0 +1,15 @@
+#
+# launch permissions
+#
+lp1:
+  id: 1
+  groupname: ""
+  url: /process_definitions/vacation_request_0.rb
+lp2:
+  id: 2
+  groupname: ""
+  url: /process_definitions/simple_sequence_1.xml
+lp3:
+  id: 3
+  groupname: ""
+  url: /process_definitions/simple_concurrence_1.rb

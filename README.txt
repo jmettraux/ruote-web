@@ -24,23 +24,24 @@
 
     cd ruote-web
     rake install_workflow_engine
-    rake bootstrap_db
+    rake bootstrap_dev_db
+    rake populate_dev_db
 
 
-The last step (bootstrap_db) assumes that your database admin user is named "root" (and it will ask for the password of that user two times).
+The 'bootstrap_dev_db' step assumes that your database admin user is named "root" (and it will ask for the password of that user two times).
 
 If you want to install the dependencies (rufus and ruote) as ruby gems, you can run
 
     rake gem_install_workflow_engine
 
-instead of "rake install_workflow_engine"
+instead of "rake install_workflow_engine". (this won't install the 'bleeding edge' engine but the 'stable' one packaged in a gem.
 
 
 if Rails on your system is not a 2.0.x one, you might want to freeze a local Rails :
 
     cd ruote-web && rake rails:freeze:edge TAG=rel_2-0-2
 
-That will install Rails 2.0.2 under ruote-web/vendor/rails
+That will install Rails 2.0.2 under ruote-web/vendor/rails (maybe you will to do that before the 'bootstrap_dev_db' step.
 
 
 == run it

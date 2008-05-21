@@ -1,0 +1,18 @@
+#
+# store permissions
+#
+sp1:
+  id: 1
+  storename: alpha
+  groupname: sales
+  permission: rwd
+sp2:
+  id: 2
+  storename: bravo
+  groupname: sales
+  permission: rwd
+sp2:
+  id: 2
+  storename: bravo
+  groupname: production
+  permission: rwd

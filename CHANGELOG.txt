@@ -4,6 +4,7 @@
 
 == densha - 0.9.18    not yet released
 
+- todo  #20280 : created db/dev_fixtures/ and lib/tasks/populate_dev_db
 - todo  #20221 : using the actual process representation for /process and
                  /workitem, not the definition as launched
 - todo  #20165 : refactored around filter_fields in the workitem controller

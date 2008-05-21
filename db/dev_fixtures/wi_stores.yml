@@ -1,0 +1,13 @@
+#
+# workitem stores
+#
+store1:
+  id: 1
+  name: alpha
+  regex: alpha
+
+store2:
+  id: 2
+  name: bravo
+  regex: bravo
+
