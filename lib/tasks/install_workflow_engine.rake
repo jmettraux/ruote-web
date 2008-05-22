@@ -41,8 +41,8 @@ task :gem_install_workflow_engine do
 
   GEMS = RUFUSES.dup
 
-  GEMS << "openwferu"
-  GEMS << "openwferu-extras"
+  GEMS << "ruote"
+  GEMS << "ruote-extras"
 
   GEMS << "json_pure"
   #GEMS << "xml_simple"
