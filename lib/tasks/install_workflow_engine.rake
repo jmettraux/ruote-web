@@ -24,7 +24,7 @@ task :install_workflow_engine do
   RUFUSES.each { |e| git_clone(e) }
   git_clone "ruote"
 
-  sh "sudo gem install -y json_pure"
+  sh "sudo gem install json_pure rogue_parser"
 end
 
 def git_clone (elt)
@@ -47,7 +47,9 @@ task :gem_install_workflow_engine do
   GEMS << "json_pure"
   #GEMS << "xml_simple"
 
-  sh "sudo gem install -y --no-rdoc --no-ri #{GEMS.join(' ')}"
+  GEMS << "rogue_parser"
+
+  sh "sudo gem install --no-rdoc --no-ri #{GEMS.join(' ')}"
 
   puts
   puts "installed gems  #{GEMS.join(' ')}"
