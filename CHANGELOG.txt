@@ -2,6 +2,11 @@
 = openwferu-densha CHANGELOG.txt
 
 
+== densha - 0.9.19    not yet released
+
+- bug   #20496 : couldn't display graph for process in subprocess. Fixed.
+
+
 == densha - 0.9.18    2008/05/22
 
 - todo  #20280 : created db/dev_fixtures/ and lib/tasks/populate_dev_db

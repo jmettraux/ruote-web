@@ -272,13 +272,17 @@ class WorkitemController < ApplicationController
 
       session[:workitem] = @workitem.id
 
+
       #@process_definition, @json_process_definition =
       #  LaunchPermission.load_process_definition(
       #      @workitem.full_fei.workflow_definition_url)
-      @json_process_definition =
-        $openwferu_engine.process_representation(@workitem.wfid).to_json.to_s
 
-      @paused = $openwferu_engine.is_paused?(@workitem.wfid)
+      pwfid = @workitem.full_fei.parent_wfid
+
+      @json_process_definition =
+        $openwferu_engine.process_representation(pwfid).to_json.to_s
+
+      @paused = $openwferu_engine.is_paused?(pwfid)
         # a small digression (out of the worklist, into the engine)
     end
 
