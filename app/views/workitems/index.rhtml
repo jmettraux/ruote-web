@@ -23,7 +23,7 @@
       { :title => "view workitem" })
 
     if @worklist.permission(workitem.store_name).may_write? and \
-      (not Locks.is_locked?(user, workitem.id))
+      (not Densha::Locks.is_locked?(user, workitem.id))
 
       buttons << " | "
       buttons << link_to(

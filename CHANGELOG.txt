@@ -4,6 +4,7 @@
 
 == densha - 0.9.19    not yet released
 
+- bug   #20600 : search broken (Densha::Locks). Fixed.
 - patch #20601 : issue with search form url on JRuby/Glassfish. Patch by
                  Scott Sproule.
 - bug   #20496 : couldn't display graph for process in subprocess. Fixed.
