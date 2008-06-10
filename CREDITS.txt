@@ -4,7 +4,7 @@ CREDITS
 
 OpenWFEru is an open source Ruby workflow / BPM engine made in Japan.
 
-OpenWFEru densha is a Ruby on Rails based web application around an OpenWFEru engine.
+ruote-web is a Ruby on Rails based web application around an OpenWFEru engine.
 
 
 The main project team
@@ -37,6 +37,8 @@ Donators
 Feedback
 --------
 
+Scott Sproule (form action issue on Glassfish)
+emiliojge (subprocess graph issues)
 Jim Jin (store modification bug report)
 Shivakumar Gopalakrishnan
 Jon (Compensator)

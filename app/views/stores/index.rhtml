@@ -1,6 +1,6 @@
 
-<% 
-    @worklist.store_names.each do |store_name| 
+<%
+    @worklist.store_names.each do |store_name|
 
         workitems = @worklist.workitems(store_name)
 %>
@@ -9,7 +9,7 @@
 
     <div class="store_header">
 
-        <div 
+        <div
             class="store_name"
         >store <span class="store_name_name"><%= h(store_name) %></span></div>
 
@@ -25,52 +25,52 @@
 
             dispatch_time = render_time workitem, :dispatch_time
     -%>
-        <div 
+        <div
             id="<%= store_row_id %>"
             class="store_row"
             onmouseover="<%= omover(store_row_id, 'row_over') %>"
             onmouseout="<%= omout(store_row_id, 'row_over') %>"
         >
             <div class="store_wi_info">
-                <div 
+                <div
                     class="store_wi_locked"
                     title="u : unlocked, l : locked (someone else is editing this workitem)"
                 ><%= lock_state(workitem) %></div>
-                <div 
+                <div
                     class="store_wi_id"
                     title="the worklist id for the workitem"
                 ><%= workitem.id %></div>
-                <div 
+                <div
                     class="store_wi_wfid"
                     title="the process instance id for this workitem"
                 ><%= workitem.wfid %> <%= workitem.full_fei.expression_id %></div>
-                <div 
+                <div
                     class="store_wi_pname"
                     title="the name of the participant for this workitem"
                 ><%= h(workitem.participant_name) %></div>
-                <div 
+                <div
                     class="store_wi_process"
                 ><%= link_to(
                     "#{h(workitem.full_fei.wfname)} "+
                     "#{h(workitem.full_fei.wfrevision)}",
                     {
-                        :controller => "definition", 
+                        :controller => "definition",
                         :defurl => workitem.full_fei.rails_url
                     },
-                    { 
-                        :title => "view process definition for this workitem" 
+                    {
+                        :title => "view process definition for this workitem"
                     })
                 -%></div>
-                <div 
+                <div
                     class="store_wi_activity"
                     title="the value of the activity attribute of the participant for this workitem"
                 ><%= h(workitem.activity) %></div>
-                <div 
+                <div
                     class="store_wi_dispatch_time"
                     title="when the workitem got emitted by the engine to the worklist"
                 ><%= dispatch_time %></div>
             </div>
-            <div class="store_wi_buttons"><%= 
+            <div class="store_wi_buttons"><%=
                 store_workitem_buttons(workitem)
             -%></div>
             <div style="clear: both"></div>
@@ -81,12 +81,12 @@
 
 </div>
 
-<% 
-    end 
+<%
+    end
 -%>
 
 <div class="store_search_form">
-<% form_tag '/workitems', :method => :get do %>
+<% form_tag 'workitems', :method => :get do %>
     <input type="text" name="q" />
     <input type="submit" value="search" title="searches among the workitems" />
 <% end %>
