@@ -57,8 +57,8 @@
         participant '<%= h(workitem.participant_name) %>'
       </div>
       <div class="wis_workitem_body">
-        <% 
-          workitem.fields.each do |field| 
+        <%
+          workitem.fields.each do |field|
 
             next if field.fkey.match '^_'
             next if field.fkey == 'params'
