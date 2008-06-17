@@ -108,6 +108,12 @@
 
     wfurl = fei.wfurl
     wfurl = wfurl[7..-1] if wfurl.match /^public\//
+
+    schedules = @status.scheduled_jobs.collect { |sj|
+      s = sj.class.name + " / "
+      s << (sj.schedule_info + " / ") if sj.is_a?(Rufus::CronJob)
+      s << sj.next_time.to_s
+    }.join("<br/>\n")
 -%>
 
 <div class="process_tree">
@@ -115,12 +121,18 @@
   <br/>
 
   <div class="process_headers">
+
     <%= render_row c, "workflow name", fei.wfname %>
     <%= render_row c, "revision", fei.wfrevision %>
     <%= render_row c, "location", wfurl %>
     <%= render_row c, "workflow instance id", fei.wfid %>
     <%= render_row c, "branches", @status.branches, "indicates how many concurrent branches this process instance currently has" %>
     <%= render_row c, "status", @paused ? "<i>paused</i>" : "running" %>
+
+    <% if schedules.size > 0 %>
+      <br/>
+      <%= render_row c, "schedules", schedules %>
+    <% end %>
   </div>
   
   <br/>

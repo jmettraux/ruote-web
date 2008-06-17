@@ -1,16 +1,17 @@
 
-= openwferu-densha CHANGELOG.txt
+= OpenWFEru - ruote-web CHANGELOG.txt
 
 
-== densha - 0.9.19    not yet released
+== ruote-web - 0.9.19    not yet released
 
+- todo  #20701 : added 'schedules' to /process view
 - bug   #20600 : search broken (Densha::Locks). Fixed.
 - patch #20601 : issue with search form url on JRuby/Glassfish. Patch by
                  Scott Sproule.
 - bug   #20496 : couldn't display graph for process in subprocess. Fixed.
 
 
-== densha - 0.9.18    2008/05/22
+== ruote-web - 0.9.18    2008/05/22
 
 - todo  #20280 : created db/dev_fixtures/ and lib/tasks/populate_dev_db
 - todo  #20221 : using the actual process representation for /process and
