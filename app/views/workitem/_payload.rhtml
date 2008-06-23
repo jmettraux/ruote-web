@@ -1,9 +1,30 @@
 
 <%= javascript_include_tag "densha-hash" %>
-
-<%= javascript_include_tag "densha-dial" %>
+<%= javascript_include_tag "fluo-dial" %>
 
 <script>
+
+  //
+  // placed here for now
+  //
+  var RuoteMisc = function() {
+  
+    function link (href, text, attributes) {
+  
+      var atts = { "href": href };
+  
+      for (var key in attributes) {
+        atts[key] = attributes[key];
+      };
+  
+      var l = new Element("a", atts);
+      l.innerHTML = text;
+  
+      return l;
+    }
+  
+    return { link: link };
+  }();
 
   var delegationTargets = <%= @delegation_targets.to_json %>;
 
@@ -11,7 +32,7 @@
 
     //if (hasClosedDialog()) return;
 
-    var d = DenshaDial.newDialog(
+    var d = FluoDial.newDialog(
         "delegate workitem to another store", 
         300, 
         56 + delegationTargets.length * 28);

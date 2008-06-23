@@ -1,6 +1,6 @@
 
 <%= javascript_include_tag "fluo-min" %>
-<%= javascript_include_tag "densha-dial" %>
+<%= javascript_include_tag "fluo-dial" %>
 <%= javascript_include_tag "densha-hash" %>
 
 <script>
@@ -27,7 +27,7 @@
 
       if (hasClosedDialog()) return;
 
-      var d = DenshaDial.newDialog
+      var d = FluoDial.newDialog
           ("upload new version of expression (as YAML file)", 500, 105);
 
       var f = new Element
@@ -52,7 +52,7 @@
 
       var l = Object.keys(items).length;
 
-      var d = DenshaDial.newDialog(title, width, (l + 9) * 14);
+      var d = FluoDial.newDialog(title, width, (l + 9) * 14);
 
       var hash = new Element("div", { "id": "hash", "class": "hash_hash" });
       d.body.appendChild(hash);
