@@ -2,31 +2,31 @@
 #--
 # Copyright (c) 2007-2008, John Mettraux, OpenWFE.org
 # All rights reserved.
-# 
-# Redistribution and use in source and binary forms, with or without 
+#
+# Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-# 
+#
 # . Redistributions of source code must retain the above copyright notice, this
-#   list of conditions and the following disclaimer.  
-# 
-# . Redistributions in binary form must reproduce the above copyright notice, 
-#   this list of conditions and the following disclaimer in the documentation 
+#   list of conditions and the following disclaimer.
+#
+# . Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
 #   and/or other materials provided with the distribution.
-# 
+#
 # . Neither the name of the "OpenWFE" nor the names of its contributors may be
 #   used to endorse or promote products derived from this software without
 #   specific prior written permission.
-# 
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE 
-# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
-# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
-# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
-# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
-# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #++
 #
@@ -47,11 +47,11 @@ module WorkitemHelper
 
     s = ""
 
-    from_view = request.env['HTTP_REFERER'] && 
+    from_view = request.env['HTTP_REFERER'] &&
         (request.env['HTTP_REFERER'].match(/\/view\//) != nil)
 
     s << link_to(
-      "back", 
+      "back",
       { :controller => "workitem", :action => "back",
         :id => @workitem.id, :from_view => from_view },
       { :title => "return to the previous page" })
@@ -64,10 +64,10 @@ module WorkitemHelper
         (not Densha::Locks.is_locked?(session[:user], @workitem.id))
 
         link_to(
-          "edit", 
+          "edit",
           { :controller => "workitem", :action => "edit",
             :id => @workitem.id, :from => "view" },
-          { :title => "edit this workitem" }) 
+          { :title => "edit this workitem" })
 
       else
 
@@ -78,12 +78,12 @@ module WorkitemHelper
 
       html =
         link_to_function(
-          "save", 
-          "DenshaHash.doSubmit('save');", 
+          "save",
+          "DenshaHash.doSubmit('save');",
           :title => "saves the workitem, but don't let it resume in the process for now")
 
       if @delegation_targets.size > 0
-        html += 
+        html +=
           " | " +
           link_to_function(
             "delegate",
@@ -94,15 +94,15 @@ module WorkitemHelper
       html +=
         " | " +
         link_to_function(
-          "proceed", 
+          "proceed",
           "DenshaHash.doSubmit('proceed');",
           :title => "saves the workitem and make it resume in the process")
 
       if @workitem.store_name != 'users'
         html +=
-         " | " + 
+         " | " +
          link_to(
-           "pick", 
+           "pick",
              { :controller => "workitem", :action => "pick",
                :id => @workitem.id },
              { :title => "pick this workitem and put it into own store" })
@@ -148,7 +148,7 @@ module WorkitemHelper
     t_name_view = t_name + "_view"
 
     if @view_only and File.exist?("#{TEMPLATE_PREFIX}#{t_name_view}.rhtml")
-      t_name_view  
+      t_name_view
     elsif File.exist?("#{TEMPLATE_PREFIX}#{t_name}.rhtml")
       t_name
     else

@@ -67,8 +67,8 @@
 
   wfid = if session[:user].admin?
     link_to(
-      fei.wfid, 
-      { :controller => :process, :id => fei.wfid },
+      fei.wfid,
+      { :controller => :process, :id => fei.parent_wfid },
       { :title => "edit this process instance" })
   else
     fei.wfid

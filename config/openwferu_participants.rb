@@ -24,7 +24,7 @@ end
 
 #require 'openwfe/extras/participants/basecamp_participants'
 #$openwferu_engine.register_participant(
-#    "john", 
+#    "john",
 #    OpenWFE::Extras::BasecampParticipant.new(
 #        :host => ENV['BC_HOST'],
 #        :username => ENV['BC_USERNAME'],

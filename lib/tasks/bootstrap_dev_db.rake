@@ -2,7 +2,7 @@
 require 'fileutils'
 
 #
-# Bootstraps the development database for ruote-rest
+# Bootstraps the development database for ruote-web
 #
 #   rake bootstrap_dev_db
 #

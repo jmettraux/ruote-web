@@ -177,7 +177,7 @@ module ApplicationHelper
     end
 
     key = h(key)
-    value = h(value)
+    value = h(value) unless value.to_s[0, 1] == '<'
 
     s = ""
     s << "<div"
