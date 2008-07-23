@@ -4,6 +4,7 @@
 
 == ruote-web - 0.9.19    not yet released
 
+- bug   #21305 : replay_at_error was broken for subprocesses. Fixed.
 - todo  #20701 : added 'schedules' to /process view
 - bug   #20600 : search broken (Densha::Locks). Fixed.
 - patch #20601 : issue with search form url on JRuby/Glassfish. Patch by

@@ -55,7 +55,7 @@ class ProcessesController < ApplicationController
     @wfid = params[:id]
 
     Thread.new do
-        $openwferu_engine.cancel_process @wfid
+      $openwferu_engine.cancel_process @wfid
     end
 
     #flash[:notice] = "process instance #{@wfid} got cancelled"
@@ -76,6 +76,8 @@ class ProcessesController < ApplicationController
     error_wfei = params[:id]
 
     wfid, expid = OpenWFE::FlowExpressionId.split_web_s error_wfei
+
+    # TODO : wfid to parent wfid
 
     status = $openwferu_engine.process_status wfid
     error = status.errors.values.find { |err| err.fei.expid == expid }
