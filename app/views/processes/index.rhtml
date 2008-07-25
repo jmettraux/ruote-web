@@ -48,7 +48,7 @@
     <%
         #@status.values.each do |@row_status|
 
-        statuses = @status.values.sort_by { |e| e.launch_time }
+        statuses = @status.values.sort_by { |e| e.launch_time || Time.now.to_f }
         statuses.each do |@row_status|
 
             @row_wfid = @row_status.wfid
