@@ -81,11 +81,25 @@ $openwferu_engine.init_service(
   'activityFeedService', OpenWFE::Extras::ActivityFeedService)
 
 
-at_exit do
+if Module.constants.include?('Mongrel') then
   #
-  # make sure to stop the workflow engine when 'densha' terminates
+  # graceful shutdown for Mongrel by Torsten Schoenebaum
 
-  $openwferu_engine.stop
+  class Mongrel::HttpServer
+    alias :old_graceful_shutdown :graceful_shutdown
+    def graceful_shutdown
+      $openwferu_engine.stop
+      old_graceful_shutdown
+    end
+  end
+else
+
+  at_exit do
+    #
+    # make sure to stop the workflow engine when 'densha' terminates
+
+    $openwferu_engine.stop
+  end
 end
 
 #

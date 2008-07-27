@@ -37,6 +37,7 @@ Donators
 Feedback
 --------
 
+Torsten Schoenebaum - better engine.stop for Mongrel
 Scott Sproule (form action issue on Glassfish)
 emiliojge (subprocess graph issues)
 Jim Jin (store modification bug report)

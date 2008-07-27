@@ -4,6 +4,7 @@
 
 == ruote-web - 0.9.19    not yet released
 
+- patch #21338 : better shutdown for Mongrel by Torsten Schoenebaum.
 - bug   #21339 : get /processes failed if process 'empty'. Fixed.
 - bug   #21305 : replay_at_error was broken for subprocesses. Fixed.
 - todo  #20701 : added 'schedules' to /process view
