@@ -105,7 +105,7 @@ class WorkitemController < ApplicationController
 
     if json
 
-      fields = JSON.parse(json)
+      fields = ActiveSupport::JSON.decode(json)
         #
         # take the workitem payload as a whole via json
 

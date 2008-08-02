@@ -127,11 +127,11 @@ class ProcessController < ApplicationController
       su = params[:show_unapplied]
 
       fei = params['hash_form_fei']
-      fei = JSON.parse fei
-      fei = OpenWFE::FlowExpressionId.from_h fei
+      fei = ActiveSupport::JSON.decode(fei)
+      fei = OpenWFE::FlowExpressionId.from_h(fei)
 
       data = params['hash_form_json']
-      data = JSON.parse data
+      data = ActiveSupport::JSON.decode(data)
 
       $openwferu_engine.update_expression_data fei, data
 

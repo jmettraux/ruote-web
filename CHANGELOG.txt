@@ -4,6 +4,8 @@
 
 == ruote-web - 0.9.19    not yet released
 
+- todo  #21419 : removed direct dependency on json gem, relying on whatever
+                 is present (activesupport or json).
 - patch #21338 : better shutdown for Mongrel by Torsten Schoenebaum.
 - bug   #21339 : get /processes failed if process 'empty'. Fixed.
 - bug   #21305 : replay_at_error was broken for subprocesses. Fixed.

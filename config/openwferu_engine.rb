@@ -1,7 +1,6 @@
 
-#$LOAD_PATH << "~/openwfe-ruby/lib"
-#$LOAD_PATH << "vendor/openwfe-ruby/lib"
-$LOAD_PATH << "../ruote/lib"
+$LOAD_PATH << "~/ruote/lib"
+$LOAD_PATH << "~/rufus/rufus-scheduler/lib"
 
 require 'rubygems'
 
@@ -13,7 +12,6 @@ require 'densha/engine' # lib/densha/engine.rb
 
 require 'openwfe/extras/misc/activityfeed' # gem 'openwferu-extras'
 
-require 'json' # gem 'json_pure'
 
 #
 # checking for initial data

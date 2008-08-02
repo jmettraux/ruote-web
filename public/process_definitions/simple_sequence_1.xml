@@ -8,6 +8,7 @@
   </description>
   <sequence>
     <set field="message" value="hello world !" />
+    <sleep for="30s" />
     <participant ref="alpha" />
     <participant ref="bravo" />
   </sequence>
