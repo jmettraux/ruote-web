@@ -16,6 +16,9 @@ John Mettraux ( project lead ( john >at< openwfe.org ) )
 Contributors
 ------------
 
+Scott Conrad (bootstrap_dev_db.rake enhancements)
+Torsten Schoenebaum - better engine.stop for Mongrel
+Scott Sproule (form action issue on Glassfish)
 Arjan van Bentem (patches)
 Amedeo Paglione (patches)
 Juan Pedro Paredes (patches)
@@ -37,8 +40,6 @@ Donators
 Feedback
 --------
 
-Torsten Schoenebaum - better engine.stop for Mongrel
-Scott Sproule (form action issue on Glassfish)
 emiliojge (subprocess graph issues)
 Jim Jin (store modification bug report)
 Shivakumar Gopalakrishnan

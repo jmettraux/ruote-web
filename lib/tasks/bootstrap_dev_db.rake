@@ -8,11 +8,13 @@ require 'fileutils'
 #
 task :bootstrap_dev_db do
 
-  db = "densha_development"
-  db_admin_user = "root"
+  db = 'densha_development'
+  db_admin_user = 'root'
+  db_user = 'densha'
 
-  sh 'mysql -u '+db_admin_user+' -p -e "drop database '+db+'"'
-  sh 'mysql -u '+db_admin_user+' -p -e "create database '+db+' CHARACTER SET utf8 COLLATE utf8_general_ci"'
+  sh "mysql -u #{db_admin_user} -p -e \"drop database if exists #{db}\""
+  sh "mysql -u #{db_admin_user} -p -e \"create database #{db} CHARACTER SET utf8 COLLATE utf8_general_ci\""
+  sh "mysql -u #{db_admin_user} -p -e \"grant all privileges on #{db}.* to '#{db_user}'@'localhost' identified by '#{db_user}'\""
 
   #sh "rake db:migrate VERSION=-1"
   sh "rake db:migrate"

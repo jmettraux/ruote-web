@@ -18,7 +18,7 @@
 
 (assumes you're using MySQL on a Unix system)
 
-    sudo gem install -y json_pure atom-tools
+    sudo gem install -y atom-tools
 
     git clone git://github.com/jmettraux/ruote-web.git
 
@@ -41,7 +41,7 @@ if Rails on your system is not a 2.0.x one, you might want to freeze a local Rai
 
     cd ruote-web && rake rails:freeze:edge TAG=rel_2-0-2
 
-That will install Rails 2.0.2 under ruote-web/vendor/rails (maybe you will to do that before the 'bootstrap_dev_db' step.
+That will install Rails 2.0.2 under ruote-web/vendor/rails (maybe you will to do that before the 'bootstrap_dev_db' step).
 
 
 == run it
