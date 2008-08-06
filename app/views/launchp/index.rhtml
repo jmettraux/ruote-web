@@ -4,7 +4,7 @@
 
         lpid = "launchp-#{i}"
 -%>
-<div 
+<div
     id="<%= lpid %>"
     class="launchp"
     onmouseover="<%= omover lpid, 'row_over' %>"
@@ -12,7 +12,7 @@
 >
     <div class="launchp_info">
         <span class="launchp_url">
-            <a 
+            <a
                 href="<%= h(permission.url) %>"
                 title="direct link to the process definition [document]"
             ><%= h(permission.url) %></a>
@@ -20,12 +20,12 @@
         <span class="launchp_groupname"><%= h(permission.groupname) %></span>
         <span class="launchp_description"><%= get_description(permission) %></span>
     </div>
-    <div 
+    <div
         class="launchp_buttons"
-    ><%= 
+    ><%=
         link_to(
             "launch", :action => "launch", :id => permission.id)
-    -%> | <%= 
+    -%> | <%=
         link_to(
             "view", :controller => "definition", :id => permission.id)
     -%></div>

@@ -1,5 +1,6 @@
 
-<%= javascript_include_tag "fluo-min" %>
+<%= javascript_include_tag "fluo-json" %>
+<%= javascript_include_tag "fluo-can" %>
 
 <%= stylesheet_link_tag 'SyntaxHighlighter' %>
 <%= javascript_include_tag "shCore" %>
@@ -13,8 +14,8 @@
 <div class="definitions_buttons">
 <%=
     link_to(
-        "launch this process", 
-        :controller => "launchp", :action => "launch", 
+        "launch this process",
+        :controller => "launchp", :action => "launch",
         :id => @lp.id) if @from_launch
 -%>
 </div>
@@ -31,10 +32,10 @@
 dp.SyntaxHighlighter.HighlightAll('code');
 </script>
 
-<div style="width: 39%; float:right;">
+<!--div style="width: 39%; float:right;"-->
+<div style="float: right;">
   <%= render_fluo %>
 </div>
-
 <div style="clear: both;"></div>
 
 <div class="explanation">

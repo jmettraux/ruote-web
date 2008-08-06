@@ -204,11 +204,16 @@ module ApplicationHelper
   # renders a fluo graph (expects to find the procdef in
   # @json_process_definition
   #
-  def render_fluo
+  def render_fluo (workitems=[])
+
+    workitems = Array(workitems)
+
     <<-EOS
-<div id="fluo"></div>
+<canvas id="fluo" width="50" height="50"></canvas>
 <script>
-  Fluo.renderExpression('fluo', null, #{@json_process_definition});
+  FluoCan.renderFlow('fluo', #{@json_process_definition}, {'workitems': #{workitems.inspect}});
+  FluoCan.toggleMinor('fluo');
+  FluoCan.crop('fluo');
 </script>
 
 <br/>
@@ -216,7 +221,7 @@ module ApplicationHelper
 <div class="fluo_text">
   #{link_to_function(
     "hide/show minor expressions",
-    "Fluo.toggleMinorExpressions('fluo');")}
+    "FluoCan.toggleMinor('fluo'); FluoCan.crop('fluo')")}
 </div>
     EOS
   end

@@ -1,14 +1,6 @@
 
-<%= javascript_include_tag "fluo-min" %>
+<%= javascript_include_tag "fluo-json" %>
+<%= javascript_include_tag "fluo-can" %>
 
-<%= render_fluo %>
-
-<script>
-
-    Fluo.tagExpressionsWithWorkitems(
-        'fluo', [ '<%= @workitem.full_fei.expression_id %>' ]);
-            //
-            // surround with a border the current position in the
-            // [graphical rendition of the] process definition
-</script>
+<%= render_fluo @workitem.full_fei.expression_id %>
 

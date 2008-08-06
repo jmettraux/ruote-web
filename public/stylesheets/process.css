@@ -63,11 +63,8 @@
 }
 .process_fluo
 {
-    width: 47%;
-    float: left;
+    /*width: 47%;
+    float: left;*/
+    float: right;
 }
 
-.process_highlight
-{
-    background: #B5D5FF;
-}

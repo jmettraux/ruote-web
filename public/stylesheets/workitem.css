@@ -4,13 +4,13 @@
 
 .workitem_payload
 {
-    width: 50%;
+    width: 56%;
     float: left;
     padding-top: 10px;
 }
 .workitem_pdrendering
 {
-    width: 49%;
+    /*width: 49%;*/
     float: right;
     padding-top: 10px;
 }

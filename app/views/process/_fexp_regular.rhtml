@@ -7,12 +7,12 @@
   apply_time, dclass = if fexp.apply_time
 
     d = (Time.now - fexp.apply_time).to_i
-    
+
     [ render_time(fexp, :apply_time) + "<br/>",
       "process_expression" ]
   else
 
-    [ "", 
+    [ "",
       "process_unapplied_expression" ]
   end
 
@@ -22,11 +22,11 @@
     fexp.attributes.inspect
   end
 
-  mov = 
-    "highlightExpression('#{fei.expid}'); " + 
+  mov =
+    "FluoCan.highlight('fluo', '#{fei.expid}'); " +
     omover("fexp_#{fei.expid}", "process_exp_over")
-  mot = 
-    "noHighlight('#{fei.expid}'); " +
+  mot =
+    "FluoCan.highlight('fluo', null); " +
     omout("fexp_#{fei.expid}", "process_exp_over")
 
   onmouse = "onmouseover=\"#{mov}\" onmouseout=\"#{mot}\""
@@ -34,7 +34,7 @@
   c_text, c_title = if fexp.fei.expid == "0"
     [ "abort",
       "aborts (cancels) the whole process" ]
-  elsif fexp.apply_time 
+  elsif fexp.apply_time
     [ "abort",
       "cancels just this expression (and its sub expressions)" ]
   else
@@ -54,7 +54,7 @@
     end
 
     "(" + link_to_function(
-      "edit workitem", 
+      "edit workitem",
       "editWorkitem(#{fei.to_h.to_json.to_s}, #{wi})",
       :title => tt) + ")"
   else
@@ -72,7 +72,7 @@
     ""
   end
 -%>
-<div 
+<div
   id="fexp_<%= fei.expid %>"
   class="<%= dclass %>"
   style="<%= style %>"
@@ -84,11 +84,11 @@
   <%=
     link_to(
         c_text,
-        { :action => :abort, 
+        { :action => :abort,
           :id => @wfid,
           :expid => fei.expid,
           :show_unapplied => @show_unapplied },
-        { 
+        {
           :confirm => "Are you sure ?",
           :title => c_title })
   -%>
