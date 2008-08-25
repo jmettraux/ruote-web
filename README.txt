@@ -23,16 +23,16 @@
     git clone git://github.com/jmettraux/ruote-web.git
 
     cd ruote-web
-    rake install_workflow_engine
-    rake bootstrap_dev_db
-    rake populate_dev_db
+    rake ruote:install
+    rake data:bootstrap
+    rake data:populate
 
 
 The 'bootstrap_dev_db' step assumes that your database admin user is named "root" (and it will ask for the password of that user two times).
 
 If you want to install the dependencies (rufus and ruote) as ruby gems, you can run
 
-    rake gem_install_workflow_engine
+    rake ruote:gem_install
 
 instead of "rake install_workflow_engine". (this won't install the 'bleeding edge' engine but the 'stable' one packaged in a gem.
 
@@ -58,7 +58,7 @@ And point your browser to http://localhost:3000 (then login as admin/admin or bo
 
 to update the engine and its dependencies, simply pull out fresh copies by doing :
 
-    cd ruote-web && rake install_workflow_engine
+    cd ruote-web && rake ruote:install
 
 
 == feedback

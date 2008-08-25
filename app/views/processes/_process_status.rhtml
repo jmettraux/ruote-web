@@ -35,14 +35,14 @@
             if sta.errors.length > 0
         -%>
         <span
-            id="show_error_<%= wfid %>_a" 
+            id="show_error_<%= wfid %>_a"
         >
-            <%= link_to_remote( 
+            <%= link_to_remote(
                 "errors",
                 {
                     :update => @row_id,
                     :position => :after,
-                    :url => { 
+                    :url => {
                         :action => 'show_process_errors', :id => wfid },
                     :loaded => "toggleButtons('show_error_"+wfid+"')"
                 },
@@ -51,8 +51,8 @@
                 })
             -%>
         </span>
-        <span 
-            id="show_error_<%= wfid %>_b" 
+        <span
+            id="show_error_<%= wfid %>_b"
             style="display: none;"
         >
             <%= link_to_function(
@@ -72,17 +72,17 @@
         -%>
         <%=
             link_to_remote(
-                'abort', 
-                { 
+                'abort',
+                {
                     #:update => @row_id,
                     :url => { :action => 'cancel_process', :id => wfid },
                     :confirm => "Abort (cancel) process '#{wfid}' ?",
                     :loaded => "hideErrors('#{wfid}');"
                 },
-                { 
+                {
                     :title => "cancels the process instance entirely"
                 })
-        -%> 
+        -%>
     |
         <%
             action_name = 'pause'
@@ -97,8 +97,8 @@
                 action_loaded = "hideErrors('#{wfid}');"
             end
         -%>
-        <%= 
-            link_to_remote( 
+        <%=
+            link_to_remote(
                 action_name,
                 {
                     #:update => @row_id,
@@ -121,11 +121,11 @@
                     :title => "work on the expression tree directly"
                 })
         -%>
-        <input 
-            name="<%= wfid %>" 
+        <input
+            name="<%= wfid %>"
             value="batch"
-            type="checkbox" 
-            class="processes_checkbox" 
+            type="checkbox"
+            class="processes_checkbox"
         />
    </td>
 
