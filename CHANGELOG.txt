@@ -4,6 +4,7 @@
 
 == ruote-web - 0.9.19    not yet released
 
+- todo  #21722 : replaced TreeChecker by the rufus-treechecker gem
 - patch #21432 : bootstrap_dev_db.rake enhancement by Scott Conrad.
 - todo  #21419 : removed direct dependency on json gem, relying on whatever
                  is present (activesupport or json).

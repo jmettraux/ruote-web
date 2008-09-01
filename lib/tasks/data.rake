@@ -62,8 +62,8 @@ namespace :data do
 
     sh 'rake db:migrate'
 
-    rm_rf [ "work_test", "work_development" ]
-    rm "log/*.log"
+    rm_rf [ 'work_test', 'work_development' ]
+    sh 'rm log/*.log'
     touch 'log/development.log'
   end
 end

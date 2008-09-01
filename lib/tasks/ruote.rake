@@ -2,7 +2,8 @@
 namespace :ruote do
 
   RUFUSES = %w{
-    dollar eval lru mnemo scheduler verbs }.collect { |e| "rufus-#{e}" }
+    dollar eval lru mnemo scheduler verbs treechecker
+  }.collect { |e| "rufus-#{e}" }
 
   #
   # do use either :install_workflow_engine either :install_dependency_gems
@@ -25,7 +26,7 @@ namespace :ruote do
     git_clone 'ruote'
 
     #sh "sudo gem install json_pure rogue_parser"
-    sh "sudo gem install rogue_parser"
+    #sh "sudo gem install rogue_parser"
   end
 
   def git_clone (elt)
@@ -45,7 +46,7 @@ namespace :ruote do
     GEMS = RUFUSES.dup
 
     GEMS << 'ruote'
-    GEMS << 'rogue_parser'
+    #GEMS << 'rogue_parser'
 
     sh "sudo gem install --no-rdoc --no-ri #{GEMS.join(' ')}"
 
