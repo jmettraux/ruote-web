@@ -16,15 +16,15 @@ class IntegrationOneTest < ActionController::IntegrationTest
     $openwferu_engine.reload_store_participants
       #
       # forces a reload of the store participants
-      # (the fixtures seem to be loaded after the engine has been 
+      # (the fixtures seem to be loaded after the engine has been
       # initialized)
 
     File.open(TEST_PDEF, "w") do |f|
 
       f.puts "class TestDefinition < OpenWFE::ProcessDefinition"
-      f.puts "    sequence do"
-      f.puts "        alpha"
-      f.puts "    end"
+      f.puts "  sequence do"
+      f.puts "    alpha"
+      f.puts "  end"
       f.puts "end"
     end
   end
@@ -55,7 +55,7 @@ class IntegrationOneTest < ActionController::IntegrationTest
   end
 
   def test_participants
-    
+
     assert_not_nil $openwferu_engine.get_participant("alpha")
     assert_not_nil $openwferu_engine.get_participant("bravo")
     #assert_not_nil $openwferu_engine.get_participant("user_.*")
@@ -67,6 +67,12 @@ class IntegrationOneTest < ActionController::IntegrationTest
     wi.fei = "(fei 0.9.14 engine/engine public/process_definitions/test.rb SimpleSequence 0 20070827-desogihiso bravo 0.0.3)"
     wi.store_name = "bravo"
     wi.save!
+
+    class << $openwferu_engine # neutralizing that just for this test...
+      def process_representation (wfid)
+        []
+      end
+    end
 
     alice = new_session_as(:alice)
     bob = new_session_as(:bob)
