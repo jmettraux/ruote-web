@@ -146,7 +146,7 @@ module Densha
 
       def build_participant_map
 
-        init_service OpenWFE::S_PARTICIPANT_MAP, ParticipantMap
+        init_service :s_participant_map, ParticipantMap
       end
   end
 

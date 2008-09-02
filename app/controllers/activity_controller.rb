@@ -52,10 +52,10 @@ class ActivityController < ApplicationController
     format = params[:format]
 
     feed = $openwferu_engine.ac['activityFeedService'].get_feed(
-        participant_regex,
-        :upon => upon,
-        :feed_uri => request.request_uri,
-        :format => format)
+      participant_regex,
+      :upon => upon,
+      :feed_uri => request.request_uri,
+      :format => format)
 
     render :text => feed.to_s
   end
