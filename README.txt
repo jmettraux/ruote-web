@@ -28,20 +28,20 @@
     rake data:populate
 
 
-The 'bootstrap_dev_db' step assumes that your database admin user is named "root" (and it will ask for the password of that user two times).
+The 'data:bootstrap' step assumes that your database admin user is named "root" (and it will ask for the password of that user two times).
 
 If you want to install the dependencies (rufus and ruote) as ruby gems, you can run
 
     rake ruote:gem_install
 
-instead of "rake install_workflow_engine". (this won't install the 'bleeding edge' engine but the 'stable' one packaged in a gem.
+instead of "rake ruote:install". (this won't install the 'bleeding edge' engine but the 'stable' one packaged in a gem.
 
 
 if Rails on your system is not a 2.0.x one, you might want to freeze a local Rails :
 
     cd ruote-web && rake rails:freeze:edge TAG=rel_2-0-2
 
-That will install Rails 2.0.2 under ruote-web/vendor/rails (maybe you will to do that before the 'bootstrap_dev_db' step).
+That will install Rails 2.0.2 under ruote-web/vendor/rails (maybe you will to do that before the 'data:bootstrap' step).
 
 
 == run it

@@ -21,16 +21,16 @@ if $0 =~ /script\/server/ and RAILS_ENV == 'development'
   users = User.find(:all)
 
   if users.size < 1
-      puts
-      puts
-      puts " * no initial data *"
-      puts
-      puts "consider running"
-      puts
-      puts "    rake bootstrap_dev_db"
-      puts "    rake populate_dev_db"
-      puts
-      puts
+    puts
+    puts
+    puts " * no initial data *"
+    puts
+    puts "consider running"
+    puts
+    puts "    rake data:bootstrap"
+    puts "    rake data:populate"
+    puts
+    puts
   end
 end
 

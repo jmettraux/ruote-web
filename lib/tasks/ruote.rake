@@ -10,23 +10,23 @@ namespace :ruote do
   # but not both
   #
 
-  #
-  # Installs under vendor/ the latest source of OpenWFEru (and required
-  # subprojects).
-  #
-  task :install do
+  desc "Installs under vendor/ the latest source of OpenWFEru (and required subprojects)."
+  task :install => :get_from_github do
 
-    FileUtils.mkdir "tmp" unless File.exists?("tmp")
+    sh 'sudo gem install --no-rdoc --no-ri rogue_parser'
+    sh 'sudo gem install --no-rdoc --no-ri atom-tools'
+  end
 
-    rm_r 'vendor/ruote'
-    rm_r 'vendor/rufus'
-    mkdir 'vendor' unless File.exist?('vendor')
+  task :get_from_github do
+
+    mkdir 'tmp' unless File.exists?('tmp')
+
+    rm_r 'vendor/openwfe' if File.exists?('vendor/openwfe')
+    rm_r 'vendor/rufus' if File.exists?('vendor/rufus')
+    mkdir 'vendor' unless File.exists?('vendor')
 
     RUFUSES.each { |e| git_clone(e) }
     git_clone 'ruote'
-
-    #sh "sudo gem install json_pure rogue_parser"
-    #sh "sudo gem install rogue_parser"
   end
 
   def git_clone (elt)
@@ -34,7 +34,7 @@ namespace :ruote do
     chdir 'tmp' do
       sh "git clone git://github.com/jmettraux/#{elt}.git"
     end
-    cp_r "tmp/#{elt}/lib/*", 'vendor/'
+    cp_r "tmp/#{elt}/lib/.", 'vendor/'
     rm_r "tmp/#{elt}"
   end
 
@@ -47,6 +47,7 @@ namespace :ruote do
 
     GEMS << 'ruote'
     #GEMS << 'rogue_parser'
+    GEMS << 'atom-tools'
 
     sh "sudo gem install --no-rdoc --no-ri #{GEMS.join(' ')}"
 
