@@ -16,6 +16,8 @@
 
 == how to install it
 
+You can get it from GitHub or download a prepackaged release at http://rubyforge.org/frs/?group_id=2609 (then jump to '== preparing it')
+
 (assumes you're using MySQL on a Unix system)
 
     sudo gem install -y atom-tools
@@ -24,8 +26,6 @@
 
     cd ruote-web
     rake ruote:install
-    rake data:bootstrap
-    rake data:populate
 
 
 The 'data:bootstrap' step assumes that your database admin user is named "root" (and it will ask for the password of that user two times).
@@ -42,6 +42,14 @@ if Rails on your system is not a 2.0.x one, you might want to freeze a local Rai
     cd ruote-web && rake rails:freeze:edge TAG=rel_2-0-2
 
 That will install Rails 2.0.2 under ruote-web/vendor/rails (maybe you will to do that before the 'data:bootstrap' step).
+
+
+== preparing it
+
+in order to prepare the development database, you'll have to
+
+    rake data:bootstrap
+    rake data:populate
 
 
 == run it
