@@ -14,13 +14,16 @@
     http://difference.openwfe.org:3000
 
 
+== required gems
+
+    sudo gem install -y --no-ri --no-rdoc atom-tools rogue_parser
+
+
 == how to install it
 
 You can get it from GitHub or download a prepackaged release at http://rubyforge.org/frs/?group_id=2609 (then jump to '== preparing it')
 
 (assumes you're using MySQL on a Unix system)
-
-    sudo gem install -y atom-tools
 
     git clone git://github.com/jmettraux/ruote-web.git
 
